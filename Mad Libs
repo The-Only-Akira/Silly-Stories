@@ -1,0 +1,2046 @@
+import java.util.Scanner;
+
+
+
+static Scanner sc = new Scanner(System.in);
+
+public static void main(String[] args) {
+
+    String[] genres = {
+            "Heroic Fantasy",
+            "Sci-Fi Adventure",
+            "Ninja/Samurai",
+            "Mythology",
+            "Post-Apocalyptic",
+            "Pirate Adventure",
+            "Detective/Crime",
+            "Comedy/Slapstick",
+            "Romance",
+            "Horror",
+            "Sci-Fi Thriller",
+            "Fantasy Romance",
+            "Superhero",
+            "Steampunk",
+            "Western"
+    };
+
+    System.out.println("=== HERO GENRES ===");
+    for (int i = 0; i < genres.length; i++) {
+        System.out.println((i + 1) + ". " + genres[i]); // prints each genre as a bullet
+    }
+
+
+    System.out.print("Choose a genre (1–15): ");
+    int genreChoice = sc.nextInt();
+    sc.nextLine();
+
+    String[][] storyTitles = getStoryTitles();
+
+    System.out.println("\n--- STORIES IN " + genres[genreChoice - 1] + " ---");
+    for (int i = 0; i < 15; i++) {
+        System.out.println((i + 1) + ". " + storyTitles[genreChoice - 1][i]);
+    }
+
+    System.out.print("Choose a story (1–15): ");
+    int storyChoice = sc.nextInt();
+    sc.nextLine();
+
+    System.out.println("\n--- HERO CREATION ---");
+
+    // SAME inputs for all genres
+    System.out.print("Hero Name: "); String hero = sc.nextLine();
+    System.out.print("Companion Name: "); String companion = sc.nextLine();
+    System.out.print("Weapon: "); String weapon = sc.nextLine();
+    System.out.print("Villain Name: "); String villain = sc.nextLine();
+    System.out.print("Power/Magic: "); String power = sc.nextLine();
+    System.out.print("Creature: "); String creature = sc.nextLine();
+    System.out.print("Place: "); String place = sc.nextLine();
+    System.out.print("Relic/Item: "); String relic = sc.nextLine();
+    System.out.print("Number (It should be more than 1): "); String number = sc.nextLine();
+
+    String story = getStoryTemplate(genreChoice - 1, storyChoice - 1,
+            hero, companion, weapon, villain,
+            power, creature, place, relic, number);
+
+    System.out.println("\n=== YOUR HERO'S MAD LIB STORY ===\n");
+    System.out.println(story);
+    System.out.println("\n" + "=".repeat(60));
+    System.out.println("📜 PRESS SHIFT + SCROLL DOWN with mouse to read the story! 📜");
+    System.out.println("=".repeat(60) + "\n");
+}
+
+static String[][] getStoryTitles() {
+    String[][] titles = new String[15][15];
+
+    // GENRE 1: Heroic Fantasy
+    titles[0] = new String[]{
+            "Quest for the Crystal Peaks","Dragonsoul Reborn","Forest of Whispering Bones","The Cursed Crown","Stormhammer Trial",
+            "Temple of Nine Echoes","The Fallen Griffin","Blade of Hollow Stars","Runes of Emberfall","Tidebreaker Voyage",
+            "Goblin War Choir","The Serpent Throne","Moonforge Awakening","Shadowroot Covenant","Phoenixborne Ascension"
+    };
+
+    // GENRE 2: Sci-Fi Adventure
+    titles[1] = new String[]{
+            "Starship Exodus","Rise of Cybersoul","Galaxy of Ashes","The Nebula Child","Protocol Prime",
+            "Quantum Rift","War of Starborn","Infinite Outpost","Celestial Rebellion","Asteroid Fortress",
+            "Hyperwave Escape","Nano Rebellion","Eclipse Armada","Singularity Trials","Dark Matter Legacy"
+    };
+
+    // GENRE 3: Ninja/Samurai
+    titles[2] = new String[]{
+            "Nightblade Path","Crimson Ronin","The Oni Gate","Mask of Silent Wind","Shogun’s Vengeance",
+            "Trial of Black Lotus","Katana Soul Legacy","Shadow Clan Uprising","Ghost Samurai","Bamboo Forest Tears",
+            "Moonlit Blood","Dragon Shuriken","Silent Isles War","Demon Sword Ritual","Silent Duel"
+    };
+
+    // GENRE 4: Mythology
+    titles[3] = new String[]{
+            "Labyrinth of the Sun God","The Titan’s Hunger","Oracle of Silent Peaks","The Bronze Colossus","Thunder of the Skyfather",
+            "Serpent of the Underworld","Harp of Fate","The Twelve-Star Trial","The War of Echoing Gods","The Hydra’s Pact",
+            "Sands of Immortals","Chariot of Golden Storms","Valkyrie’s Oath","The Ocean Herald","Mask of the Forgotten God"
+    };
+
+    // GENRE 5: Post-Apocalyptic
+    titles[4] = new String[]{
+            "Ashfall Survivor","Ruins of Neon Dirt","Wasteland Kingmakers","Radioactive Dawn","The Rusted Highway",
+            "Toxic Sun Cult","War of Forgotten Machines","Ash-Eater Horde","Crimson Outpost Siege","Scavenger’s Last Hope",
+            "Nuclear Afterlight","The Melted Horizon","Breaker Clan Uprising","Steelwater Compound","The Dust-Born Truth"
+    };
+
+    // GENRE 6: Pirate Adventure
+    titles[5] = new String[]{
+            "The Ghost Ship Battle","Treasure of Black Cove","Kraken’s Wrath","Skull Island Siege","Storms of the Seven Seas",
+            "Curse of the Golden Compass","The Sunken Armada","Skeleton Crew Showdown","Voyage of the Lost Buccaneers","The Jolly Roger Hunt",
+            "Cannonball Chaos","Mermaid’s Mischief","Pirate King’s Revenge","Hidden Treasure Hunt","Seas of Chaos"
+    };
+
+    // GENRE 7: Detective/Crime
+    titles[6] = new String[]{
+            "The Vanishing Jewel","Midnight Stakeout","The Shadow Syndicate","Case of the Phantom Thief","Murder on 5th Avenue",
+            "The Poisoned Chalice","Secret of the Clocktower","The Stolen Cipher","Detective vs The Gangster","The Crimson Mask",
+            "Whispers in the Alley","The Missing Heirloom","The Silent Witness","Murder at Dawn","The Final Interrogation"
+    };
+
+    // GENRE 8: Comedy/Slapstick
+    titles[7] = new String[]{
+            "Banana Slip Saga","Pie Fight Pandemonium","The Great Whoopee Cushion Caper","Dancing Disaster","Jellybean Jam",
+            "Clumsy Crusaders","The Rubber Chicken Rebellion","Slip ‘n’ Slide Showdown","Tickle Monster Attack","The Laughing Llamas",
+            "Pogo Stick Pandemonium","Soggy Sandwich Surprise","The Misadventure of Mr. Mustache","Spilled Milk Catastrophe","Laugh Riot Rescue"
+    };
+
+    // GENRE 9: Romance
+    titles[8] = new String[]{
+            "Moonlight Serenade","Letters to a Lover","The Secret Picnic","Heartstrings","The Forbidden Dance",
+            "Roses and Thorns","Cupid’s Arrow","A Kiss in the Rain","Starlit Confession","The Heart’s Labyrinth",
+            "Passion on the Pier","The Love Potion","Dancing Under Fireworks","The Hidden Bouquet","Letters from Afar"
+    };
+
+    // GENRE 10: Horror
+    titles[9] = new String[]{
+            "Haunted Manor","Night of the Crawling Shadows","The Phantom’s Revenge","Cursed Asylum","Blood Moon Rising",
+            "The Screaming Woods","The Forgotten Crypt","The Possessed Doll","House of Whispers","The Wailing Lake",
+            "Nightmare Carnival","The Shadow in the Attic","Eclipse of Fear","The Lurking Thing","The Dark Harvest"
+    };
+
+    // GENRE 11: Sci-Fi Thriller
+    titles[10] = new String[]{
+            "The Quantum Heist","Nanobot Nightmare","Temporal Rift","AI Rebellion","The Last Starbase",
+            "Virus in the System","Dark Matter Pursuit","The Cyber Conspiracy","Orbit of Lies","Neon Grid Chase",
+            "The Blackout Protocol","Stellar Sabotage","Galactic Intrigue","Singularity Collapse","The Exoplanet Enigma"
+    };
+
+    // GENRE 12: Fantasy Romance
+    titles[11] = new String[]{
+            "Enchanted Hearts","Dragon’s Kiss","Moonlit Vows","The Sorcerer’s Love","Fae’s Embrace",
+            "The Crystal Ball Romance","Spellbound Hearts","The Prince’s Secret","Starlit Desire","The Cursed Love",
+            "Knight’s Passion","The Enchanted Garden","Love Beyond Realms","Phoenix’s Flame","Cupid’s Sorcery"
+    };
+
+    // GENRE 13: Superhero
+    titles[12] = new String[]{
+            "Rise of Captain Valor","The Shadow Guardian","ElectroStrike","The Steel Sentinel","ChronoHero",
+            "Nightwing Justice","The Masked Avenger","Power Surge","Lightning Defender","The Crimson Crusader",
+            "Omega Force","Hero of Tomorrow","Invisible Strike","Titan’s Call","The Ultimate Protector"
+    };
+
+    // GENRE 14: Steampunk
+    titles[13] = new String[]{
+            "Clockwork Conspiracy","The Steam Baron","Airship Uprising","Gears of Destiny","Copper & Smoke",
+            "The Iron Zeppelin","Mechanical Revolution","The Steam Detective","Automaton’s Secret","The Brass Engine",
+            "Clocktower Heist","The Steamwright","The Cog & Crown","Victorian Vortex","The Gearmaster’s Gamble"
+    };
+
+    // GENRE 15: Western
+    titles[14] = new String[]{
+            "Showdown at Sundown","The Outlaw’s Trail","Silver Canyon Siege","Gunsmoke Gulch","Wanted: Dead or Alive",
+            "The Sheriff’s Last Ride","Gold Rush Gamble","Desert Duel","The Lone Ranger Returns","Bandits of Red Rock",
+            "Prairie Thunder","The Stagecoach Heist","Tumbleweed Trouble","The Marshal’s Revenge","Frontier Justice"
+    };
+
+
+    return titles;
+}
+
+static String getStoryTemplate(int genreIndex, int storyIndex,
+                               String hero, String companion, String weapon,
+                               String villain, String power, String creature,
+                               String place, String relic, String number) {
+
+    String[][] stories = new String[15][];
+
+    // GENRE 1: Heroic Fantasy
+    stories[0] = new String[]{
+            // 1. Quest for the Crystal Peaks
+            String.format(
+                    "%s ventured through %s with %s at their side, gripping %s as the wind howled around them. " +
+                            "Every step drew them closer to %s and a raging %s that had frozen the land in fear. " +
+                            "By calling on the hidden power of %s again and again, they finally endured %s brutal trials and recovered %s, giving their world a fragile new hope.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. Dragonsoul Reborn
+            String.format(
+                    "%s and %s journeyed toward %s, following half-burned maps and stories whispered around dying campfires. " +
+                            "There they confronted %s and a wild %s whose roar shook the sky, forcing them to wield %s with every ounce of courage they had left. " +
+                            "After %s exhausting days locked in struggle, they reclaimed %s and felt the ancient dragonsoul stir awake within it.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Forest of Whispering Bones
+            String.format(
+                    "Guided by %s, %s stepped into the haunted depths of %s where every tree seemed to lean in and listen. " +
+                            "They faced %s and a relentless %s, using %s to cut through both illusion and terror as the forest tried to swallow them whole. " +
+                            "Only after %s long nights did they finally secure %s and quiet the whispers that had plagued the living for generations.",
+                    companion, hero, place, villain, creature, power, number, relic
+            ),
+
+            // 4. The Cursed Crown
+            String.format(
+                    "%s left %s with %s slung across their back and %s marching beside them, determined to end the age of shadows. " +
+                            "Together they confronted %s and a summoned %s that guarded the throne room like a living curse, channeling %s with desperate precision. " +
+                            "After surviving %s relentless challenges, they restored %s and shattered the dark legacy that plagued the old crown.",
+                    hero, place, weapon, companion, villain, creature, power, number, relic
+            ),
+
+            // ✅ FIXED - Exactly 8 %s, 8 arguments
+            String.format(
+                    "%s traveled with %s to %s, where thunder never stopped rumbling over the jagged cliffs. " +
+                            "There they battled %s and %s itself, a towering creature that seemed carved from lightning, forcing them to shape %s into a shield against the storm. " +
+                            "Only after %s ferocious battles did they retrieve %s and prove themselves worthy of the stormhammer's legacy.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+
+            // 6. Temple of Nine Echoes
+            String.format(
+                    "Inside %s, echoes of forgotten prayers followed %s and %s down every crumbling corridor. " +
+                            "They faced %s and %s twisted by ancient magic, channeling %s to keep their minds and bodies from breaking under the weight of the temple’s curses. " +
+                            "After solving %s cruel riddles, they finally claimed %s and silenced the echoes that had tormented the land.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. The Fallen Griffin
+            String.format(
+                    "%s tracked %s all the way to %s, leaving a trail of broken camps and spent courage behind them. " +
+                            "There they faced both %s and a corrupted %s whose wings blotted out the sun, forcing them to wield %s just to stay standing. " +
+                            "After %s harrowing hours of battle in the dust and wind, they recovered %s and freed the skies from the tyrant’s shadow.",
+                    hero, villain, place, villain, creature, power, number, relic
+            ),
+
+            // 8. Blade of Hollow Stars
+            String.format(
+                    "%s and %s marched into %s beneath a sky that looked more like shattered glass than starlight. " +
+                            "They battled %s and a spectral %s that slipped between worlds, learning to bend %s so their strikes could land on something half made of nightmare. " +
+                            "After enduring %s impossible missions, they finally obtained %s and felt the hollow stars sing in their hands.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. Runes of Emberfall
+            String.format(
+                    "In %s, molten rivers lit the path as %s drew %s and stepped toward the heart of the volcano. " +
+                            "They fought %s with %s at their side, relying on %s to keep from burning as both stone and flame turned against them. " +
+                            "Only after surviving %s brutal trials did they restore %s and calm the runes that had threatened to tear the world apart.",
+                    place, hero, weapon, villain, companion, power, number, relic
+            ),
+
+            // 10. Tidebreaker Voyage
+            String.format(
+                    "%s sailed from %s with storms on the horizon and both %s and %s sworn to see the journey through. " +
+                            "On the open sea they battled %s and a tidal %s that rose like a living wall of water, using %s to carve a path through the raging ocean. " +
+                            "After weathering %s monstrous waves, they finally reclaimed %s and learned why the tides had turned against the world.",
+                    hero, place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 11. Goblin War Choir
+            String.format(
+                    "%s charged into %s with %s beside them, trusting %s to sing through the clash of steel and snarls. " +
+                            "They fought %s and a shrieking choir of %s whose voices shattered stone, relying on sheer will and %s to stay upright. " +
+                            "Only after %s sleepless nights of battle did they retrieve %s and silence the war songs that had drowned out all hope.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 12. The Serpent Throne
+            String.format(
+                    "%s and %s invaded %s where banners of scales and fangs hung from every crumbling pillar. " +
+                            "They confronted %s and a scaled %s coiled around the throne, using %s to cut through venom, lies, and enchanted steel alike. " +
+                            "After enduring %s deadly duels in the throne room’s shadow, they won %s and ended the serpent’s reign.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 13. Moonforge Awakening
+            String.format(
+                    "%s traveled with %s to %s, a forge lit not by fire but by the cold glow of the moon. " +
+                            "There they faced %s and a lunar %s whose presence warped time itself, forcing them to focus %s with perfect precision. " +
+                            "Only after %s full moons of struggle did they restore %s and awaken the forge that would reshape destiny.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Shadowroot Covenant
+            String.format(
+                    "Deep within %s, roots and shadows tangled together as %s and %s descended into the earth’s oldest secrets. " +
+                            "They fought %s and a twisted %s born from broken covenants, using %s to cut through both darkness and oaths. " +
+                            "After surviving %s brutal battles in the underground gloom, they seized %s and repaired the bond between forest and folk.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 15. Phoenixborne Ascension
+            String.format(
+                    "%s journeyed to %s with %s, where ashes drifted through the air like snow and nothing ever truly died. " +
+                            "There they confronted %s and a blazing %s that rose again each time it fell, forcing them to wield %s with ever-growing resolve. " +
+                            "After enduring %s cycles of fiery rebirth, they finally reclaimed %s and stepped forward as something new, marked by flame but not consumed by it.",
+                    hero, place, companion, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[1] = new String[]{
+            // 1. Starship Exodus
+            String.format(
+                    "%s piloted through %s with %s the droid humming softly beside them, fingers tight around %s as stars blurred into streaks of light. " +
+                            "Ahead waited %s and a rogue %s that had seized control of the evacuation lanes, threatening every ship that tried to escape. " +
+                            "By channeling the full force of %s again and again, they survived %s dangerous light-years and finally recovered %s, giving the scattered fleets a path to freedom.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. Rise of Cybersoul
+            String.format(
+                    "%s and %s touched down on %s, the air thick with static and neon haze from a thousand broken billboards. " +
+                            "There they confronted %s and a monstrous %s born from corrupted code, forcing them to wield %s against both machine and mind. " +
+                            "After %s long days of digital skirmishes and back-alley ambushes, they reclaimed %s and felt the first stirrings of a new, awakened cybersoul.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Galaxy of Ashes
+            String.format(
+                    "%s, guided by %s, entered %s where shattered planets drifted like gravestones around a dying star. " +
+                            "In that graveyard they faced %s and a rogue AI %s that commanded fleets of drones, using %s to slip between fire and vacuum. " +
+                            "Only after %s brutal trials through debris fields and trap-laden stations did they secure %s and give the galaxy a fragile chance to rise from the ashes.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 4. The Nebula Child
+            String.format(
+                    "Inside %s, strange colors bled across the cockpit as %s and %s flew deeper into the living nebula than anyone had dared. " +
+                            "They fought %s and a plasma-born %s that shifted shape with every flare, relying on %s to keep their ship in one piece. " +
+                            "After %s relentless hours of dodging energy storms and gravitational traps, they restored %s and calmed the nebula’s restless child.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 5. Protocol Prime
+            String.format(
+                    "%s traveled to %s with %s, following a faint distress code buried inside old star charts. " +
+                            "There they faced %s and a space pirate %s who had twisted ancient defense protocols into weapons, forcing them to bend %s to override the corrupted systems. " +
+                            "Only after %s high-risk missions did they recover %s and rewrite the prime directive that would safeguard the sector.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Quantum Rift
+            String.format(
+                    "%s and %s explored %s, a station half-phased between realities where corridors never seemed to end in the same place twice. " +
+                            "They battled %s and a sentient %s that fed on paradox, using %s to anchor themselves whenever time and gravity slipped. " +
+                            "After surviving %s disorienting nights of looping timelines, they retrieved %s and sealed the quantum rift before it tore the galaxy apart.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 7. War of Starborn
+            String.format(
+                    "In %s, the stars themselves seemed to burn closer as %s armed %s and prepared for an impossible stand. " +
+                            "They fought %s and %s, a looming %s whose very presence warped space, channeling %s to turn the battlefield to their advantage. " +
+                            "Only after %s light-years of scattered ambushes and desperate pushes did they finally claim %s and tip the war of the starborn.",
+                    place, place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 8. Infinite Outpost
+            String.format(
+                    "%s and %s infiltrated %s, a labyrinthine outpost that stretched far longer inside than any blueprint suggested. " +
+                            "They confronted %s and a mutated %s bred in forgotten labs, relying on %s to cut through barriers both physical and digital. " +
+                            "After %s tense hours spent navigating endless corridors and ambushes, they obtained %s and reset the station’s broken core.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. Celestial Rebellion
+            String.format(
+                    "%s journeyed across %s with %s, hopping between fractured moons and hidden rebel waystations. " +
+                            "Together they faced %s and an alien %s that led a rebellion of its own, forcing them to use %s to balance fragile alliances and open combat. " +
+                            "After %s daring raids deep into enemy territory, they secured %s and turned the celestial uprising toward a chance at peace.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 10. Asteroid Fortress
+            String.format(
+                    "%s piloted to %s with %s riding shotgun, the ship weaving between tumbling rocks and stray mines. " +
+                            "At the heart of the field they confronted %s and a rogue drone %s guarding the asteroid fortress, using %s to slip between firing arcs and locked doors. " +
+                            "After surviving %s brutal cycles of attack and retreat, they retrieved %s and cracked open the fortress that had haunted the trade lanes.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Hyperwave Escape
+            String.format(
+                    "%s and %s boarded %s as alarms blared, feeling the deck shudder under enemy fire. " +
+                            "They battled %s and a warp-jumping %s that flickered in and out of sight, harnessing %s to keep their escape corridor stable. " +
+                            "Only after %s desperate missions through folding space did they recover %s and complete the most improbable hyperwave escape in recorded history.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 12. Nano Rebellion
+            String.format(
+                    "At %s, the walls seemed to breathe as swarms shifted just beneath the surface while %s and %s moved cautiously forward. " +
+                            "They faced %s and a rogue %s made of countless nanoscale machines, using %s to rewrite code faster than it could adapt. " +
+                            "After %s painstaking steps through the infested complex, they claimed %s and ended the rebellion before it consumed every living thing.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 13. Eclipse Armada
+            String.format(
+                    "%s launched from %s with %s, their ship slipping into formation among a ragtag fleet facing impossible odds. " +
+                            "They fought %s and a glowing %s that anchored the Eclipse Armada, channeling %s through their weapons to punch holes in the encroaching darkness. " +
+                            "After %s blistering jumps from battlefield to battlefield, they retrieved %s and shattered the armada’s unbreakable line.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 14. Singularity Trials
+            String.format(
+                    "%s entered %s with %s, the edges of reality already bending toward the hungry pull of the singularity. " +
+                            "Inside, they battled %s and a teleporting %s that flickered between dimensions, relying on %s to keep their minds anchored. " +
+                            "Only after surviving %s impossible loops of cause and effect did they secure %s and stabilize the core that held the trials together.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 15. Dark Matter Legacy
+            String.format(
+                    "%s and %s crossed %s, a region where sensors failed and even starlight seemed afraid to enter. " +
+                            "They faced %s and a void-dwelling %s born from dark matter itself, shaping %s into the only light strong enough to cut through the emptiness. " +
+                            "After enduring %s perilous cycles on the edge of nothingness, they claimed %s and rewrote the legacy of the darkness between the stars.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[2] = new String[]{
+            // 1. Nightblade Path
+            String.format(
+                    "%s, guided by %s, slipped into the shadows of %s where lantern light barely reached the ground. " +
+                            "With %s ready, they hunted for %s and a ghostly %s that stalked rooftops and alleys alike, forcing them to rely on %s more than steel. " +
+                            "After enduring %s tense nights of silent duels and close calls, they reclaimed %s and carved their name into the legend of the nightblades.",
+                    hero, companion, place, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. Crimson Ronin
+            String.format(
+                    "%s and %s traveled to %s, a land haunted by the memory of fallen warriors and broken oaths. " +
+                            "There they confronted %s and a yokai %s that fed on bloodshed, pushing their limits as they wielded %s against both steel and spirit. " +
+                            "Only after %s grueling duels did they secure %s and prove that even a ronin can rewrite a crimson-stained destiny.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. The Oni Gate
+            String.format(
+                    "In %s, %s raised %s before the towering Oni Gate, feeling the weight of countless battles pressing down on their shoulders. " +
+                            "They faced %s and a shadowy %s that slipped between the stones, using %s to strike where no normal warrior could reach. " +
+                            "After surviving %s brutal challenges beneath the gate’s watchful eyes, they restored %s and sealed the path to the demon realm.",
+                    place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 4. Mask of Silent Wind
+            String.format(
+                    "%s left %s with %s at their side and %s hidden beneath their cloak, sworn to move like the wind itself. " +
+                            "Together they confronted %s and a silent %s that could kill without a sound, relying on %s to sense danger where eyes could not see. " +
+                            "After enduring %s deadly trials in narrow streets and high rooftops, they recovered %s and claimed the mask of the silent wind.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 5. Shogun’s Vengeance
+            String.format(
+                    "%s ventured with %s to %s, where banners of the shogun’s rule hung heavy over frightened villages. " +
+                            "There they faced %s and a mystical %s that carried out vengeance in the shogun’s name, forcing them to bend %s toward justice rather than revenge. " +
+                            "After %s fierce nights of sword clashes and whispered plots, they retrieved %s and shattered the cycle of blood-debt.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Trial of Black Lotus
+            String.format(
+                    "%s and %s stood before %s, where the trial of the Black Lotus began with a single step into fog-shrouded gardens. " +
+                            "They battled %s and a samurai spirit %s bound to the flowers, using %s to cut through illusions and poisoned whispers alike. " +
+                            "Only after passing %s silent battles within the mist did they claim %s and earn the mark of the Black Lotus.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 7. Katana Soul Legacy
+            String.format(
+                    "Within %s, old armor and forgotten blades lined the halls as %s walked toward a destiny tied to steel. " +
+                            "They fought %s with %s in hand and %s watching their back, calling on %s to awaken the legacy sleeping inside the katana. " +
+                            "After enduring %s long hours of training and combat, they restored %s and proved that a blade’s soul lives in the one who wields it.",
+                    place, hero, villain, weapon, companion, power, number, relic
+            ),
+
+            // 8. Shadow Clan Uprising
+            String.format(
+                    "%s and %s infiltrated %s under moonless skies, slipping past guards like shadows given form. " +
+                            "They confronted %s and a demon %s leading a clan uprising, using %s to turn hidden passageways and rooftops into weapons. " +
+                            "After completing %s perilous missions in the enemy’s stronghold, they obtained %s and broke the spine of the shadow clan’s revolt.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. Ghost Samurai
+            String.format(
+                    "%s journeyed to %s with %s, following rumors of a ghost samurai who never lost a duel. " +
+                            "There they battled %s and a cursed %s that walked between life and death, relying on %s to strike at the exact moment the spirit became solid. " +
+                            "After %s sleepless nights of haunting encounters, they retrieved %s and granted the ghost samurai long-awaited peace.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 10. Bamboo Forest Tears
+            String.format(
+                    "Guided by %s, %s entered %s where bamboo stalks swayed like silent witnesses to old tragedies. " +
+                            "They faced %s and a lurking %s that cried with the voices of the lost, using %s to cut a path through sorrow and fear. " +
+                            "Only after %s grueling challenges beneath the dripping leaves did they claim %s and let the forest’s tears finally dry.",
+                    companion, hero, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Moonlit Blood
+            String.format(
+                    "%s charged into %s with %s at their side, the moon casting long shadows across the battlefield. " +
+                            "They defeated %s and a ruthless ninja %s whose blades flashed like falling stars, harnessing %s to stay one strike ahead. " +
+                            "After %s bloody duels lit only by moonlight, they recovered %s and ended the night of crimson storms.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 12. Dragon Shuriken
+            String.format(
+                    "%s and %s crossed %s, training tirelessly as they moved from village to village under the watch of distant mountains. " +
+                            "They fought %s and a spirit %s that struck like a flung star, using %s to guide every shuriken and every breath. " +
+                            "After surviving %s relentless nights of ambushes and tests, they secured %s and proved they were worthy of the dragon’s mark.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 13. Silent Isles War
+            String.format(
+                    "Deep in %s, waves broke quietly against the shore as %s stepped onto islands where no birds dared sing. " +
+                            "They faced %s and a yokai %s that ruled the silence, shaping %s into a weapon that could cut through both mist and fear. " +
+                            "Only after %s exhausting hours of stealth and sudden clashes did they restore %s and bring voices back to the Silent Isles.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 14. Demon Sword Ritual
+            String.format(
+                    "%s ventured across %s with %s, racing against time to stop a forbidden ritual that would awaken an ancient blade. " +
+                            "They battled %s and a demon %s bound to the sword, pouring %s into every strike to keep its corruption at bay. " +
+                            "After %s terrifying trials before the ritual’s final moment, they retrieved %s and sealed the demon sword away from mortal hands.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 15. Silent Duel
+            String.format(
+                    "%s and %s approached %s knowing that only one final, wordless clash would decide the fate of the land. " +
+                            "They confronted %s and a rogue %s who moved without sound, forcing them to trust %s and instinct over sight and hearing. " +
+                            "After %s tense nights of preparation and a single perfect strike, they claimed %s and ended the era of silent assassins.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[3] = new String[]{
+            // 1. Labyrinth of the Sun God
+            String.format(
+                    "%s journeyed to %s with %s, following sun-baked roads toward a labyrinth no map dared to show. " +
+                            "Within its shifting halls they faced %s and a monstrous %s born from the sun god’s forgotten wrath, channeling %s to survive searing light and endless maze. " +
+                            "After enduring %s burning omens and near-fatal wrong turns, they reclaimed %s and soothed the rage that had set the labyrinth alive.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. The Titan’s Hunger
+            String.format(
+                    "%s and %s entered %s, where the ground shook with each distant breath of a slumbering titan. " +
+                            "They confronted %s and a divine %s that devoured mountains, using %s to turn falling stone and roaring winds into stepping-stones. " +
+                            "Only after %s grim prophecies played out before their eyes did they secure %s and quiet the titan’s endless hunger.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Oracle of Silent Peaks
+            String.format(
+                    "Guided by %s, %s climbed toward %s, a place where even the gods spoke only in whispers. " +
+                            "There they battled %s and a titan-sized %s that guarded the oracle’s cave, channeling %s to hear truth through the thunder of battle. " +
+                            "After surviving %s cryptic trials and riddles sealed in stone, they restored %s and let the oracle’s voice ring clear once more.",
+                    companion, hero, place, villain, creature, power, number, relic
+            ),
+
+            // 4. The Bronze Colossus
+            String.format(
+                    "%s ventured across %s with %s, following tales of a giant statue that moved when no one watched. " +
+                            "Standing before the Bronze Colossus, they faced %s and a monstrous %s of metal and fire, using %s to slip between its crushing steps. " +
+                            "After %s brutal trials beneath its iron gaze, they reclaimed %s and stilled the colossus before it could crush the world beneath its feet.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 5. Thunder of the Skyfather
+            String.format(
+                    "%s and %s journeyed to %s, where storms never ceased and lightning carved scars into the clouds. " +
+                            "There they confronted %s and a cursed %s wielding the borrowed thunder of the skyfather, forcing them to shape %s into a shield of light. " +
+                            "Only after weathering %s roaring omens in the heart of the storm did they restore %s and return the thunder to its rightful master.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Serpent of the Underworld
+            String.format(
+                    "Inside %s, shadows clung like cobwebs as %s descended with %s, each step echoing into the depths below. " +
+                            "They faced %s and a monstrous %s coiled around the rivers of the underworld, using %s to cut through poison and fear alike. " +
+                            "After %s harrowing trials in the dark beneath the world, they reclaimed %s and loosened the serpent’s grip on lost souls.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. Harp of Fate
+            String.format(
+                    "%s traveled to %s with %s, seeking the legendary harp whose strings could alter destiny. " +
+                            "There they confronted %s and a winged %s bound to the instrument, using %s to pluck notes that bent time instead of surrendering to it. " +
+                            "After playing through %s perilous prophecies, they recovered %s and gently rewrote a future that had seemed unchangeable.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 8. The Twelve-Star Trial
+            String.format(
+                    "%s and %s explored %s, where constellations hung so close they seemed almost within reach. " +
+                            "They battled %s and a celestial %s that shifted from star to star, using %s to leap between lights and stay ahead of its blazing strikes. " +
+                            "Only after passing %s shining prophecies in the night sky did they claim %s and earn a place among the legends of the heavens.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. The War of Echoing Gods
+            String.format(
+                    "Within %s, the air rang with distant arguments as the voices of old gods clashed without bodies. " +
+                            "%s stood beside %s against %s and a titanic %s made of pure echo, shaping %s into a single clear voice that cut through the chaos. " +
+                            "After %s punishing trials amid clashing divine tempers, they secured %s and finally brought silence—and peace—to the warring heavens.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 10. The Hydra’s Pact
+            String.format(
+                    "%s traveled to %s with %s, tracking rumors of a bargain struck in secret with a many-headed terror. " +
+                            "They confronted %s and a hydra-like %s whose every fallen head birthed two more, forcing them to direct %s at the heart of the pact instead of its endless limbs. " +
+                            "After surviving %s deadly omens and countless regrown threats, they reclaimed %s and shattered the pact that had chained kingdoms in fear.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Sands of Immortals
+            String.format(
+                    "At %s, the sands glowed faintly with the footsteps of those who refused to die. " +
+                            "%s and %s faced %s and a divine %s that guarded the secret of endless life, using %s to walk the fine line between mortality and eternity. " +
+                            "Only after %s grueling days beneath an unblinking sun did they restore %s and prove that immortality is a burden, not a prize.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 12. Chariot of Golden Storms
+            String.format(
+                    "%s ventured into %s with %s, chasing the burning trails of a chariot that rode the skies. " +
+                            "They battled %s and a thunderous %s that dragged storms behind it, relying on %s to match its speed and survive its blazing wheels. " +
+                            "After %s wild rides through lightning and cloud, they retrieved %s and guided the chariot back to its sacred path.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 13. Valkyrie’s Oath
+            String.format(
+                    "%s and %s entered %s, a battlefield frozen in time where fallen warriors still stood ready. " +
+                            "They faced %s and a winged %s bound by a broken oath, using %s to weigh the worth of every soul caught between worlds. " +
+                            "After %s solemn trials of courage and sacrifice, they reclaimed %s and helped the valkyrie keep her promise at last.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. The Ocean Herald
+            String.format(
+                    "In %s, waves rose higher than towers as storms answered some distant, angry call. " +
+                            "%s and %s confronted %s and a sea-born %s that carried messages from forgotten gods, shaping %s into a calm strong enough to still the water. " +
+                            "After %s roaring ni" +
+                            "ghts facing the ocean’s full fury, they recovered %s and turned the herald’s message from doom to mercy.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 15. Mask of the Forgotten God
+            String.format(
+                    "%s traveled across %s with %s, following stories of a god whose name no one remembered but whose power lingered. " +
+                            "They confronted %s and a spectral %s bound to an ancient mask, using %s to balance reverence with defiance. " +
+                            "Only after %s haunting visions and trials in crumbling temples did they claim %s and decide whether the forgotten god should sleep or rise again.",
+                    hero, place, companion, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[4] = new String[]{
+            // 1. Ashfall Survivor
+            String.format(
+                    "%s roamed %s with %s, each step kicking up clouds of ash that never seemed to settle. " +
+                            "Gripping %s, they hunted for a way to stop %s and a mutant %s that ruled the ruins like a twisted king, relying on %s to push through poison and fear. " +
+                            "After %s brutal days in the gray wasteland, they finally reclaimed %s and proved that even in ash, something new can rise.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. Ruins of Neon Dirt
+            String.format(
+                    "%s and %s traveled through %s, where half-dead neon signs flickered over broken concrete and rusted metal. " +
+                            "There they confronted %s and a raider %s that turned the ruins into a hunting ground, forcing them to wield %s as both weapon and hope. " +
+                            "Only after %s long nights of ambushes and narrow escapes did they secure %s and bring a rare glimmer of light back to the dark streets.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Wasteland Kingmakers
+            String.format(
+                    "In %s, the wind carried only dust and the echo of distant engines as %s tightened their grip on %s. " +
+                            "They faced %s and a feral %s that ruled over desperate survivors, channeling %s to decide whether the wasteland would kneel or stand up again. " +
+                            "After %s bloody days of skirmishes and uneasy alliances, they reclaimed %s and learned that crowning a king can be as dangerous as killing one.",
+                    place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 4. Radioactive Dawn
+            String.format(
+                    "%s journeyed across %s with %s, watching the horizon glow a sickly color as another radioactive dawn broke. " +
+                            "They confronted %s and a glowing %s that stalked the poisoned fields, relying on %s to shield their bodies and minds from the burning air. " +
+                            "After enduring %s terrifying hours beneath the warped sunrise, they retrieved %s and proved that even a broken world can see a new morning.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 5. The Rusted Highway
+            String.format(
+                    "%s and %s rode down %s, a rusted highway lined with wrecks that told stories no one wanted to remember. " +
+                            "They battled %s and a scavenger %s that ruled the road, using %s to turn every twisted car and collapsed bridge into an advantage. " +
+                            "Only after %s dangerous nights of high-speed ambushes did they reclaim %s and open the highway as a lifeline instead of a graveyard.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Toxic Sun Cult
+            String.format(
+                    "Inside %s, the sky burned an eerie color while followers chanted beneath a blazing symbol. " +
+                            "%s and %s confronted %s and a mutated %s worshiped as a living sign of the toxic sun, harnessing %s to cut through both radiation and fanatic faith. " +
+                            "After %s suffocating trials under that merciless sky, they recovered %s and shattered the cult’s grip on the desperate.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. War of Forgotten Machines
+            String.format(
+                    "%s and %s defended %s as metal giants stirred from decades of sleep, their eyes flaring to life one by one. " +
+                            "They faced %s and a rogue %s that commanded the forgotten machines, using %s to outthink old war code written for a different age. " +
+                            "After %s relentless challenges of steel and fire, they restored %s and shut down the last echoes of a war that should have ended long ago.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 8. Ash-Eater Horde
+            String.format(
+                    "%s traveled to %s with %s, stepping carefully as the ground shifted under half-buried bones. " +
+                            "There they confronted %s and a mechanical %s that led an ash-eating horde, forcing them to bend %s into a weapon strong enough to pierce metal and smoke. " +
+                            "After %s desperate missions on the edge of collapse, they reclaimed %s and scattered the horde before it devoured everything that remained.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. Crimson Outpost Siege
+            String.format(
+                    "Deep in %s, walls stained with old blood surrounded an outpost that refused to fall. " +
+                            "%s stood with %s against %s and a relentless %s, using %s to turn every broken tower and shattered gate into a last line of defense. " +
+                            "Only after %s brutal days and nights of unending assault did they retrieve %s and prove that some outposts can outlast the end of the world.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 10. Scavenger’s Last Hope
+            String.format(
+                    "%s and %s crossed %s, living off whatever scraps they could pry from abandoned ruins. " +
+                            "They faced %s and a feral %s that hunted scavengers for sport, relying on %s to stay one move ahead when luck ran thin. " +
+                            "After %s unforgiving nights in the dirt and dust, they recovered %s and gave the scattered scavengers a final, fragile hope.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Nuclear Afterlight
+            String.format(
+                    "In %s, the world glowed with a faint, sick afterlight that never truly faded to night. " +
+                            "%s confronted %s and a radioactive %s that stalked the craters, shaping %s into the only shield strong enough to survive the fallout. " +
+                            "After %s grueling days breathing through filters and fear, they reclaimed %s and dimmed the afterlight enough for life to try again.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 12. The Melted Horizon
+            String.format(
+                    "%s traveled across %s with %s, where the horizon rippled like liquid metal under a broken sun. " +
+                            "They battled %s and a molten %s that crawled across the landscape, using %s to redirect rivers of burning waste away from the last survivors. " +
+                            "After %s blistering trials on the edge of collapse, they retrieved %s and cooled the melted horizon just enough to walk beneath it.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 13. Breaker Clan Uprising
+            String.format(
+                    "%s and %s infiltrated %s, a fortress of scrap and steel where the Breaker Clan planned its next uprising. " +
+                            "They confronted %s and a towering %s that led the raiders, relying on %s to fracture the clan’s unity instead of just its armor. " +
+                            "After %s dangerous missions among traitors and thieves, they reclaimed %s and ended the uprising before it tore the wasteland apart.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Steelwater Compound
+            String.format(
+                    "At %s, water flowed behind walls of reinforced metal while the rest of the world choked on dust. " +
+                            "%s and %s faced %s and a ruthless %s that hoarded every drop, using %s to break through both defenses and old fears. " +
+                            "Only after %s punishing trials at the gates did they secure %s and share the first clean water the wasteland had seen in years.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 15. The Dust-Born Truth
+            String.format(
+                    "%s journeyed through %s with %s, their faces hidden behind masks as dust storms erased the past with every gust. " +
+                            "They confronted %s and a storm-riding %s that carried secrets no one wanted uncovered, calling on %s to strip away lies as easily as sand stripped paint. " +
+                            "After %s relentless days in the choking winds, they recovered %s and uncovered the dust-born truth about how the world truly ended.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+    stories[5] = new String[]{
+            // 1. The Ghost Ship Battle
+            String.format(
+                    "%s sailed the seas of %s with %s at their side, the creaking deck lit only by ghostly moonlight. " +
+                            "Clutching %s, they charged toward %s and a ghostly %s that rose from the mist, every cannon blast echoing like a scream from the deep. " +
+                            "After surviving %s raging storms and broadside clashes, they finally reclaimed %s and sent the phantom ship back to its watery grave.",
+                    hero, place, companion, weapon, villain, creature, number, relic
+            ),
+
+            // 2. Treasure of Black Cove
+            String.format(
+                    "%s and %s discovered %s hidden behind jagged cliffs and swirling fog, the perfect place to hide cursed gold. " +
+                            "There they faced %s and a cursed %s that guarded the shore, forcing them to use %s to slip past traps and treachery alike. " +
+                            "Only after %s exhausting days of digging, fighting, and outwitting rivals did they finally reclaim %s and escape the cove with their lives—and the treasure.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Kraken’s Wrath
+            String.format(
+                    "On the dark waters of %s, waves crashed like walls around %s as they steadied %s against the rolling deck. " +
+                            "From the depths rose %s and a colossal %s, its tentacles wrapping around the ship until %s burned through the spray like lightning. " +
+                            "After %s harrowing nights locked in a dance between storm and sea monster, they secured %s and proved that even the Kraken’s wrath could be survived.",
+                    place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 4. Skull Island Siege
+            String.format(
+                    "%s raised the flag near %s, where cliffs shaped like skulls watched every approaching ship with hollow eyes. " +
+                            "They battled %s and a pirate %s who ruled the island, using %s to turn hidden coves, caves, and cannons into their own weapons. " +
+                            "After %s relentless waves of skirmishes on sand and stone, they reclaimed %s and broke the siege that had strangled the trade routes.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 5. Storms of the Seven Seas
+            String.format(
+                    "%s and %s braved the wild expanse of %s, where storms from all seven seas seemed to collide at once. " +
+                            "They faced %s and a raging %s that moved with the heart of the tempest, channeling %s into every desperate maneuver of the ship. " +
+                            "Only after riding out %s monstrous tempests did they retrieve %s and earn a reputation as legends of the storm.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Curse of the Golden Compass
+            String.format(
+                    "%s sailed through %s with %s watching the spinning needle of a golden compass that refused to point north. " +
+                            "They confronted %s and a spectral %s bound to the cursed relic, using %s to keep their minds steady as reality twisted around them. " +
+                            "After following %s impossible bearings across the sea, they finally recovered %s and lifted the curse before it claimed their souls.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. The Sunken Armada
+            String.format(
+                    "Beneath the waves of %s lay broken masts and shattered hulls that whispered of old wars as %s and %s dove into the depths. " +
+                            "There they faced %s and a drowned %s that commanded the spirits of the sunken armada, relying on %s to cut through darkness and water alike. " +
+                            "After %s perilous dives through twisted wreckage, they reclaimed %s and quieted the fleet that refused to rest.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 8. Skeleton Crew Showdown
+            String.format(
+                    "%s and %s boarded a creaking ship drifting off %s, its sails tattered and its crew nothing but rattling bones. " +
+                            "They confronted %s and a skeletal %s at the helm, wielding %s as clashing steel rang out across the dead sea. " +
+                            "After %s brutal clashes on the haunted deck, they retrieved %s and sent the skeleton crew back to the bottom where it belonged.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. Voyage of the Lost Buccaneers
+            String.format(
+                    "%s sailed to %s with %s, following tales of a ship that had vanished with its entire crew—and its loot. " +
+                            "They faced %s and a wandering %s that lured sailors off course, using %s to keep their wits when the stars themselves seemed to lie. " +
+                            "After %s desperate nights chasing ghostly lanterns over black water, they reclaimed %s and guided the lost buccaneers to their final harbor.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 10. The Jolly Roger Hunt
+            String.format(
+                    "%s and %s set course for %s, determined to track down the most feared flag on the sea. " +
+                            "They hunted %s and a ruthless %s who flew the Jolly Roger, relying on %s to outpace, outgun, and outthink every ambush. " +
+                            "After %s relentless chases across deadly reefs and narrow straits, they recovered %s and proved that even the fiercest pirate can be brought to heel.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Cannonball Chaos
+            String.format(
+                    "At %s, the air shook with cannon fire as %s loaded %s while %s shouted orders over the roar of battle. " +
+                            "They fought %s and a barrage of %s that seemed endless, using %s to turn the tide when all hope looked sunk. " +
+                            "After %s chaotic exchanges of broadsides and daring maneuvers, they reclaimed %s and sailed away from the smoking battlefield victorious.",
+                    place, hero, weapon, companion, villain, creature, power, number, relic
+            ),
+
+            // 12. Mermaid’s Mischief
+            String.format(
+                    "%s and %s sailed near %s, where the water shimmered with strange colors and haunting songs rose from below. " +
+                            "They confronted %s and a mischievous %s whose laughter could lure sailors to their doom, using %s to break the enchantment before it pulled them under. " +
+                            "After %s close calls with swirling currents and vanishing crew, they retrieved %s and left the mermaids’ realm with both treasure and freedom.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 13. Pirate King’s Revenge
+            String.format(
+                    "%s set sail from %s with %s, knowing the Pirate King’s banner would soon appear on the horizon. " +
+                            "They faced %s and a fearsome %s sworn to vengeance, wielding %s in battles that rocked ships and shattered alliances. " +
+                            "After %s ruthless engagements from cove to open sea, they reclaimed %s and ended the Pirate King’s long, bitter grudge.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 14. Hidden Treasure Hunt
+            String.format(
+                    "%s and %s explored %s, following a weathered map marked only with cryptic symbols and torn edges. " +
+                            "They battled %s and a cunning %s that laid traps in every cave and cove, using %s to decipher riddles and stay one step ahead of disaster. " +
+                            "After %s tense days of digging, dodging, and dueling, they recovered %s and proved that the greatest treasure hunters are as clever as they are brave.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 15. Seas of Chaos
+            String.format(
+                    "%s discovered a swirling region of storms called %s, where compasses spun wildly and no map stayed true for long. " +
+                            "With %s beside them, they confronted %s and a chaotic %s that twisted waves and wind, shaping %s into the only constant in a sea of madness. " +
+                            "After surviving %s impossible crossings through that cursed water, they reclaimed %s and charted a path through the Seas of Chaos for all who dared follow.",
+                    hero, place, companion, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[6] = new String[]{
+            // 1. The Vanishing Jewel
+            String.format(
+                    "Detective %s arrived at %s with %s, staring at the empty display where a priceless gem had once gleamed. " +
+                            "Using %s, they began to piece together how %s and a cunning %s had slipped past alarms and guards without leaving a trace. " +
+                            "After following %s tiny clues through back alleys and secret auctions, they finally recovered %s and exposed the mastermind behind the vanishing act.",
+                    hero, place, companion, weapon, villain, creature, number, relic
+            ),
+
+            // 2. Midnight Stakeout
+            String.format(
+                    "%s and %s spent the night watching %s from the shadows, waiting for something to move in the dead silence. " +
+                            "When %s and a masked %s finally appeared, they sprang into action, using %s to turn the ambush back on the criminals. " +
+                            "After %s tense hours of pursuit over rooftops and fire escapes, they secured %s and shut down the midnight operation for good.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. The Shadow Syndicate
+            String.format(
+                    "In %s, the streets buzzed with rumors while %s sifted through files and photos, trying to connect the dots no one else could see. " +
+                            "They uncovered the reach of %s and a criminal %s that seemed to be everywhere and nowhere, relying on %s to stay one step ahead of every trap. " +
+                            "After %s long nights of undercover work and close calls, they reclaimed %s and tore the Shadow Syndicate out by its roots.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 4. Case of the Phantom Thief
+            String.format(
+                    "Detective %s interrogated nervous witnesses at %s, each one describing a different version of the same impossible thief. " +
+                            "They suspected %s and a slippery %s, using %s to piece together a pattern hidden under layers of misdirection. " +
+                            "After %s days of false leads and staged crimes, they finally reclaimed %s and proved that even a phantom thief leaves a real trail.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 5. Murder on 5th Avenue
+            String.format(
+                    "%s and %s followed the chalk outline in %s, scanning every detail of the crime scene before the crowd swallowed it whole. " +
+                            "They trailed %s and a ruthless %s through glittering penthouses and grimy back rooms, using %s to pry open locked lips and closed doors. " +
+                            "Only after %s relentless days of interviews and stakeouts did they retrieve %s and reveal the truth behind the murder on 5th Avenue.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. The Poisoned Chalice
+            String.format(
+                    "At %s, the party glittered with laughter until the first glass shattered and everyone realized something was wrong. " +
+                            "%s and %s rushed to find out how %s and a subtle %s had turned a celebration into a crime scene, using %s to detect what eyes couldn’t see. " +
+                            "After %s careful tests and interrogations, they recovered %s and proved exactly who had slipped poison into the chalice.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. Secret of the Clocktower
+            String.format(
+                    "%s and %s investigated %s, where the clocktower’s chimes seemed to hide more than just the hour. " +
+                            "They faced the schemes of %s and a patient %s who used every toll of the bell as cover, relying on %s to decode the pattern in the sounds. " +
+                            "After %s tense days of watching gears and shadows, they secured %s and revealed the secret buried inside the tower’s walls.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 8. The Stolen Cipher
+            String.format(
+                    "Inside %s, papers lay scattered across the floor as %s realized a vital codebook had vanished. " +
+                            "They suspected %s and a clever %s who left taunting clues behind, using %s to crack each message before the trail went cold. " +
+                            "After %s nerve-wracking hours racing from hideout to hideout, they retrieved %s and locked the stolen cipher safely away.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 9. Detective vs The Gangster
+            String.format(
+                    "%s pursued %s through %s, every corner of the city bearing the mark of the gangster’s influence. " +
+                            "With %s at their side, they confronted a crime lord %s who trusted fear more than loyalty, using %s to turn the underworld against its own king. " +
+                            "After %s grueling days of raids and negotiations, they reclaimed %s and watched the gangster’s empire crumble.",
+                    hero, villain, place, companion, creature, power, number, relic
+            ),
+
+            // 10. The Crimson Mask
+            String.format(
+                    "%s and %s uncovered a trail of crimes linked only by a symbol: a crimson mask left at each scene in %s. " +
+                            "They hunted %s and a theatrical %s who treated the city like a stage, wielding %s to stay calm behind their own metaphorical mask. " +
+                            "After %s dramatic confrontations and narrow escapes, they recovered %s and finally unmasked the criminal for everyone to see.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Whispers in the Alley
+            String.format(
+                    "In the narrow alleys of %s, %s listened to whispers that never made it into official reports. " +
+                            "They tracked %s and a lurking %s that used fear and rumor as weapons, calling on %s to separate truth from street gossip. " +
+                            "After %s nights spent in the cold and rain, they retrieved %s and ended the reign of the shadow no one dared name.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 12. The Missing Heirloom
+            String.format(
+                    "%s and %s arrived at %s to find a wealthy family in chaos over a single missing object. " +
+                            "They suspected %s and a scheming %s hiding behind polite smiles, using %s to sift through lies wrapped in etiquette. " +
+                            "After %s painstaking interviews and quiet observations, they recovered %s and showed everyone what had been hidden in plain sight.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 13. The Silent Witness
+            String.format(
+                    "At %s, %s studied a crime scene where the only one who had seen everything couldn’t speak. " +
+                            "They relied on %s and a nervous %s who had noticed small details, using %s to reconstruct events nobody wanted to remember. " +
+                            "After %s difficult hours of patient listening and careful deduction, they secured %s and let the silent witness finally be heard.",
+                    place, hero, companion, creature, power, number, relic
+            ),
+
+            // 14. Murder at Dawn
+            String.format(
+                    "As the first light touched %s, %s stood over a body and a puzzle that had just begun. " +
+                            "They followed the trail of %s and a calculating %s through empty streets and half-awake alibis, using %s to test every story for cracks. " +
+                            "After %s relentless hours between sunrise and sunset, they reclaimed %s and proved exactly what had happened at dawn.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 15. The Final Interrogation
+            String.format(
+                    "Inside the cramped room at %s, %s sat across from %s, knowing this conversation would decide the entire case. " +
+                            "With %s watching from behind the glass, they pressed the suspect and a cornered %s, using %s to apply just enough pressure without crossing the line. " +
+                            "After %s intense rounds of questions and shifting stories, they recovered %s and walked out knowing the truth could finally stand on its own.",
+                    place, hero, villain, companion, creature, power, number, relic
+            )
+    };
+
+
+    stories[7] = new String[]{
+            // 1. Banana Slip Saga
+            String.format(
+                    "%s slipped on a banana in %s while %s tried not to laugh, sending %s flying in a very unheroic arc. " +
+                            "As they scrambled back up, they chased %s and a ridiculous %s through a gauntlet of falling crates and rolling barrels, relying on %s to keep from wiping out again. " +
+                            "After %s non‑stop laughs and spectacular pratfalls, they finally recovered %s and swore never to trust fruit on the floor again.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. Pie Fight Pandemonium
+            String.format(
+                    "%s and %s rode a unicycle across %s while juggling, which would have been impressive if they weren’t also dodging flying pies. " +
+                            "They chased %s and a giant %s through slipping crowds and exploding dessert tables, using %s to fling themselves out of every sticky mess. " +
+                            "After %s outrageous pratfalls and frosting‑covered collisions, they reclaimed %s and left the town smelling suspiciously like bakery.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. The Great Whoopee Cushion Caper
+            String.format(
+                    "In %s, %s proudly unveiled %s to catch a prankster, only to trigger it themselves in front of everyone. " +
+                            "They raced after %s and a mischievous %s hiding under chairs and behind curtains, using %s to turn each prank into a trap for the trickster instead. " +
+                            "After %s rounds of echoing squeaks and embarrassed giggles, they recovered %s and restored a tiny shred of their dignity.",
+                    place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 4. Dancing Disaster
+            String.format(
+                    "%s tried to show off their best moves in %s, while %s attempted to keep the music stand from falling over. " +
+                            "They twirled straight into %s and a clumsy %s, setting off a chain reaction of toppled chairs and flying shoes as %s tried desperately to keep the lights on. " +
+                            "After %s gloriously chaotic spins and stumbles, they retrieved %s and decided maybe dancing should come with safety gear.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 5. Jellybean Jam
+            String.format(
+                    "%s and %s accidentally spilled a mountain of jellybeans across the floor of %s, turning every step into an Olympic sliding event. " +
+                            "They skidded after %s and a giggling %s that kept tossing more candy under their feet, using %s to launch themselves from one safe spot to another. " +
+                            "After %s spectacular slides and near‑miss collisions, they finally reclaimed %s and began the world’s stickiest cleanup.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Clumsy Crusaders
+            String.format(
+                    "%s danced through %s with the heroic confidence of someone who had never met a loose floorboard, while %s carried %s just in case. " +
+                            "Together they faced %s and a silly %s that turned every step into a trip, relying on %s to keep them just barely upright. " +
+                            "After %s rounds of bumping into walls, doors, and each other, they recovered %s and embraced their title as the clumsiest crusaders in history.",
+                    hero, place, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 7. The Rubber Chicken Rebellion
+            String.format(
+                    "%s and %s chased %s across %s, only to be ambushed by an army of squeaky rubber chickens. " +
+                            "They slipped, bounced, and tripped over every flapping %s the villain had set loose, using %s to improvise a path through the chaos. " +
+                            "After %s rounds of honks, squawks, and undignified crashes, they finally recovered %s and declared victory over the poultry uprising.",
+                    hero, companion, villain, place, creature, power, number, relic
+            ),
+
+            // 8. Slip ‘n’ Slide Showdown
+            String.format(
+                    "During a festival at %s, %s accidentally turned the main street into a gigantic slip ‘n’ slide while %s tried to steer with %s. " +
+                            "They barreled straight toward %s and a gleeful %s who had sabotaged the water barrels, using %s to ride each wave instead of eating pavement. " +
+                            "After %s wild slides and mid‑air spins, they retrieved %s and left half the town laughing too hard to stand.",
+                    place, hero, companion, weapon, villain, creature, power, number, relic
+            ),
+
+            // 9. Tickle Monster Attack
+            String.format(
+                    "%s slid on a puddle in %s as %s tried to tackle %s and an over‑enthusiastic %s armed with feathers. " +
+                            "They stumbled from hiding spot to hiding spot while %s sparked harmless little zaps that made everyone jump. " +
+                            "After %s rounds of helpless laughter and flailing limbs, they secured %s and kindly asked the tickle monster to find a new hobby.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 10. The Laughing Llamas
+            String.format(
+                    "%s and %s tripped over %s in the middle of %s, landing face‑first in front of a herd of suspiciously amused llamas. " +
+                            "They faced %s and a clumsy %s that spat at all the wrong moments, using %s to dodge, weave, and sometimes just accept the spit. " +
+                            "After %s ridiculous attempts to look serious, they finally reclaimed %s and admitted that being laughed at isn’t always so bad.",
+                    hero, companion, weapon, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Pogo Stick Pandemonium
+            String.format(
+                    "In %s, %s tried to prove that crime‑fighting and pogo sticks definitely belonged together, while %s filmed the chaos for posterity. " +
+                            "They bounced after %s and a spring‑legged %s, using %s to adjust their landings whenever gravity got impatient. " +
+                            "After %s spectacular bounces, crashes, and near‑misses with street signs, they recovered %s and retired the pogo experiment. For now.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 12. Soggy Sandwich Surprise
+            String.format(
+                    "%s juggled %s in %s, determined to eat lunch and solve a case at the same time, much to %s’s concern. " +
+                            "They confronted %s and a prank‑loving %s who kept swapping sandwiches and soaking the floor, using %s to spot each trick a split second too late. " +
+                            "After %s messy pratfalls and very soggy bread, they retrieved %s and agreed that maybe food and detective work shouldn’t mix.",
+                    hero, weapon, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 13. The Misadventure of Mr. Mustache
+            String.format(
+                    "%s and %s ran through %s chasing a fake‑mustached %s who kept dropping props everywhere. " +
+                            "They dodged wobbling ladders, falling signs, and an especially dramatic %s, relying on %s to predict which gag would go off next. " +
+                            "After %s rounds of costume changes and identity mix‑ups, they secured %s and finally unpeeled the last ridiculous disguise.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Spilled Milk Catastrophe
+            String.format(
+                    "%s accidentally dropped %s in the middle of %s, sending milk cascading across the floor like a tiny tidal wave. " +
+                            "As they scrambled to fix it, they dealt with %s and a silly %s that slid, skidded, and knocked over everything in reach, using %s to keep the whole place from collapsing. " +
+                            "After %s slippery pratfalls and emergency mop missions, they recovered %s and promised to handle snacks more carefully next time.",
+                    hero, relic, place, villain, creature, power, number, relic
+            ),
+
+            // 15. Laugh Riot Rescue
+            String.format(
+                    "%s chased %s across %s, trying to look serious while dodging cream pies and confetti explosions. " +
+                            "They confronted a clumsy %s and a parade of chaotic %s, using %s to turn each prank back on the pranksters. " +
+                            "After %s outrageous gags and uncontrollable laughter, they finally retrieved %s and turned the whole mess into an accidental celebration.",
+                    hero, villain, place, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[8] = new String[]{
+            // 1. Moonlight Serenade
+            String.format(
+                    "%s fell in love with %s under the soft glow of the moon in %s, clutching %s like a nervous good‑luck charm. " +
+                            "They tried to impress %s while a jealous %s lurked nearby, using %s to create a moment that felt truly magical. " +
+                            "After %s days of stolen glances and quiet courage, they finally recovered %s and found the words their heart had been holding back.",
+                    hero, companion, place, weapon, villain, creature, power, number, relic
+            ),
+
+            // 2. Letters to a Lover
+            String.format(
+                    "%s and %s danced together in %s, letting the music hide their whispered secrets. " +
+                            "They had to avoid %s and a rival %s who tried to cut in at every turn, relying on %s to keep their hearts in step. " +
+                            "After %s nights of near‑miss confessions and crumpled letters, they reclaimed %s and finally admitted what had always been between them.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. The Secret Picnic
+            String.format(
+                    "In %s, %s spread a blanket and laid out a simple feast, hoping %s would see the care in every detail. " +
+                            "They dodged %s and a jealous %s determined to ruin the moment, using %s to add little sparks of wonder to the quiet afternoon. " +
+                            "After %s peaceful days of shared stories and shy smiles, they retrieved %s and realized their secret picnic had become something unforgettable.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 4. Heartstrings
+            String.format(
+                    "%s serenaded %s in %s, fingers trembling slightly on %s as every note carried a piece of their heart. " +
+                            "They played through interruptions from %s and a meddling %s, using %s to keep the melody bright and true. " +
+                            "After %s long nights of practicing the perfect song, they secured %s and finally let the last note say what words could not.",
+                    hero, companion, place, weapon, villain, creature, power, number, relic
+            ),
+
+            // 5. The Forbidden Dance
+            String.format(
+                    "%s and %s exchanged glances across a crowded hall in %s, knowing they weren’t supposed to dance together. " +
+                            "They slipped past %s and a watchful %s, using %s to create a small, safe circle of music and light around them. " +
+                            "After %s breathless nights of meeting in the shadows, they reclaimed %s and chose to follow their hearts instead of the rules.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Roses and Thorns
+            String.format(
+                    "%s wrote a poem in %s for %s, hiding it among a bundle of roses tied with trembling hands. " +
+                            "They had to avoid %s and a jealous %s who kept trying to snatch the gift away, depending on %s to keep hope alive. " +
+                            "After %s nights of second‑guessing and near disasters, they recovered %s and watched their feelings bloom despite the thorns.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. Cupid’s Arrow
+            String.format(
+                    "%s and %s shared a secret in %s, both pretending not to notice how close their hands had drifted. " +
+                            "They faced %s and a meddling %s that seemed determined to aim every arrow slightly off target, using %s to gently nudge fate back into place. " +
+                            "After %s days of missed chances and quiet bravery, they retrieved %s and realized love had found its mark after all.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 8. A Kiss in the Rain
+            String.format(
+                    "In %s, rain poured down as %s finally stopped running and turned toward %s. " +
+                            "They ignored %s and a rival %s watching from under an awning, trusting %s to drown out every doubt. " +
+                            "After %s storm‑soaked nights of almost saying the right thing, they reclaimed %s and sealed their feelings with a kiss in the rain.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 9. Starlit Confession
+            String.format(
+                    "%s held hands with %s beneath the stars in %s, tracing constellations to avoid looking directly at each other. " +
+                            "They faced interruptions from %s and a jealous %s who kept trying to steal the moment, using %s to keep the sky bright and patient. " +
+                            "After %s nights of shy laughter and shared wishes, they recovered %s and finally confessed what the stars had already seen.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 10. The Heart’s Labyrinth
+            String.format(
+                    "%s and %s wandered through the winding paths of %s, pretending they were only lost in the maze and not in their feelings. " +
+                            "They dodged %s and a rival %s who tried to corner them at every turn, using %s to find quiet corners where their hearts could speak. " +
+                            "After %s twists, turns, and near collisions, they retrieved %s and discovered that getting lost together was exactly what they needed.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 11. Passion on the Pier
+            String.format(
+                    "At %s, waves crashed softly beneath the boards while %s tried to decide if tonight was the night to tell %s the truth. " +
+                            "They faced %s and a watchful %s who always seemed to appear at the worst possible time, calling on %s to keep the moment from slipping away. " +
+                            "After %s evenings of walking the same stretch of pier, they reclaimed %s and finally spoke their heart over the sound of the sea.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 12. The Love Potion
+            String.format(
+                    "%s and %s picnicked in %s when a mysterious bottle labeled only with a heart appeared in their basket. " +
+                            "They suspected %s and a mischievous %s had meddled again, using %s to make sure the feelings they felt were real and not just enchanted. " +
+                            "After %s careful tests, laughs, and honest talks, they recovered %s and chose each other with clear minds and full hearts.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 13. Dancing Under Fireworks
+            String.format(
+                    "%s danced with %s in %s as fireworks painted the sky with bursts of color. " +
+                            "They ignored %s and a rival %s hovering at the edge of the crowd, trusting %s to keep the world small and bright around them. " +
+                            "After %s brilliant explosions and shared smiles, they retrieved %s and knew this would always be their night.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. The Hidden Bouquet
+            String.format(
+                    "%s sent gifts to %s in %s, hiding messages and hopes in every carefully chosen detail. " +
+                            "They dodged %s and a jealous %s intent on intercepting each surprise, using %s to guide the presents where they were meant to go. " +
+                            "After %s close calls and mixed‑up deliveries, they recovered %s and watched their feelings bloom like the hidden bouquet inside.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 15. Letters from Afar
+            String.format(
+                    "%s kissed %s goodbye in %s, promising that distance wouldn’t dull what they felt. " +
+                            "They faced %s and a rival %s who tried to fill the quiet with doubt, relying on %s to keep their words true across every mile. " +
+                            "After %s long days of waiting for each letter to arrive, they reclaimed %s and proved that love can cross any distance.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+
+    stories[9] = new String[]{
+            // 1. Haunted Manor
+            String.format(
+                    "%s entered %s with %s, the floorboards groaning under their feet as if the house were alive. " +
+                            "Clutching %s, they hunted for %s and a monstrous %s that stalked the halls just beyond the edge of the light. " +
+                            "After %s nights of whispers, slamming doors, and racing heartbeats, they recovered %s and left the manor with more scars than they arrived with.",
+                    hero, place, companion, weapon, villain, creature, number, relic
+            ),
+
+            // 2. Night of the Crawling Shadows
+            String.format(
+                    "%s and %s explored %s, where every shadow seemed to crawl a little too slowly toward them. " +
+                            "They faced %s and a haunted %s that slid along the walls, relying on %s to keep the darkness from swallowing them whole. " +
+                            "After %s sleepless nights of running from shapes that shouldn’t move, they reclaimed %s and saw the shadows finally retreat.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. The Phantom’s Revenge
+            String.format(
+                    "In %s, %s felt eyes watching from every corner as cold air wrapped around their throat. " +
+                            "They confronted %s and a ghostly %s that craved revenge, using %s to hold their ground when fear said run. " +
+                            "After %s terrifying encounters with invisible hands and echoing screams, they secured %s and gave the phantom a reason to rest.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 4. Cursed Asylum
+            String.format(
+                    "%s fled through the rotting halls of %s with %s, where old chains rattled with no one to shake them. " +
+                            "They battled %s and a vampire‑like %s that lurked in every dark doorway, wielding %s as both weapon and fragile comfort. " +
+                            "After %s horrifying nights filled with broken whispers, they retrieved %s and sealed the asylum’s doors for good.",
+                    hero, place, companion, villain, creature, weapon, number, relic
+            ),
+
+            // 5. Blood Moon Rising
+            String.format(
+                    "%s and %s confronted %s in %s as a crimson moon bathed everything in an eerie glow. " +
+                            "They fought a zombie‑like %s and its master, using %s to keep from becoming part of the shambling horde. " +
+                            "After %s screams and desperate swings in the red‑stained night, they reclaimed %s and watched the moon slowly pale.",
+                    hero, companion, villain, place, creature, power, number, relic
+            ),
+
+            // 6. The Screaming Woods
+            String.format(
+                    "During a storm in %s, %s heard the trees themselves crying out as they searched for a way through. " +
+                            "They faced %s and a demon %s that turned every gust into a shriek, calling on %s to drown the terror with stubborn courage. " +
+                            "After %s nights of branches clawing at their skin, they recovered %s and left the woods far quieter than they’d found them.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 7. The Forgotten Crypt
+            String.format(
+                    "%s and %s explored %s, the air growing colder with each step down into the earth. " +
+                            "They confronted %s and a ghostly %s guarding rows of broken tombs, using %s to push back the creeping dread. " +
+                            "After %s narrow escapes from collapsing stone and grasping hands, they retrieved %s and sealed the crypt’s secrets away again.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 8. The Possessed Doll
+            String.format(
+                    "%s hid in %s from %s, clutching a flickering light as tiny footsteps echoed where no one should be walking. " +
+                            "They faced a monstrous %s inside a smiling doll, using %s to keep its whispers from slipping into their mind. " +
+                            "After %s nights of eyes following them from every shelf, they recovered %s and locked the doll where it could never move again.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 9. House of Whispers
+            String.format(
+                    "In %s, every wall seemed to murmur secrets as %s pressed their ear to the peeling wallpaper. " +
+                            "They battled %s and a cursed %s that fed on overheard fears, using %s to quiet the voices long enough to think. " +
+                            "After %s hours of listening to things no one should know, they reclaimed %s and left the house mercifully silent.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 10. The Wailing Lake
+            String.format(
+                    "%s and %s faced %s at %s, where the water reflected faces that weren’t really there. " +
+                            "They fought a spectral %s rising from the depths, using %s to keep from being dragged under by icy hands. " +
+                            "After %s nights of echoes and ripples that moved with no wind, they secured %s and watched the lake finally lie still.",
+                    hero, companion, villain, place, creature, power, number, relic
+            ),
+
+            // 11. Nightmare Carnival
+            String.format(
+                    "%s screamed in %s as lights flickered, rides turned on their own, and laughter twisted into something sharp. " +
+                            "They confronted %s and a shadowy %s behind the funhouse mirrors, using %s to break illusions that felt too real. " +
+                            "After %s scares in spinning rooms and crooked tents, they retrieved %s and shut the carnival down before anyone else got trapped inside.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 12. The Shadow in the Attic
+            String.format(
+                    "%s and %s hid from %s in %s, huddled among dust‑covered trunks as something moved just out of sight. " +
+                            "They faced a cursed %s creeping along the rafters, relying on %s to light the places the lantern couldn’t reach. " +
+                            "After %s restless nights of scratching overhead, they recovered %s and proved the attic belonged to the living again.",
+                    hero, companion, villain, place, creature, power, number, relic
+            ),
+
+            // 13. Eclipse of Fear
+            String.format(
+                    "%s explored %s as the sun slowly vanished behind a dark disk, turning day into something much worse than night. " +
+                            "They faced %s and a phantom %s that grew stronger with every fading ray, using %s to stand firm when everything begged them to run. " +
+                            "After %s screams and choked breaths beneath the blackened sky, they reclaimed %s and watched the light return at last.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 14. The Lurking Thing
+            String.format(
+                    "%s and %s ran through %s, always feeling like something just behind them was about to reach out and grab their ankles. " +
+                            "They confronted %s and a monstrous %s that hid in corners and reflections, relying on %s to drag it into the open. " +
+                            "After %s nights of racing footsteps and slammed doors, they recovered %s and banished the lurking thing back to the dark it came from.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 15. The Dark Harvest
+            String.format(
+                    "%s survived %s, watching crops wither overnight and scarecrows twist their heads to follow passing travelers. " +
+                            "They faced %s and a ghostly %s that fed on fear and failing fields, using %s to cut through both roots and curses. " +
+                            "After %s screams carried on the wind, they retrieved %s and turned the dark harvest into a season of cautious hope.",
+                    hero, place, villain, creature, power, number, relic
+            )
+    };
+
+    // Create a 2D array for genres 11-15
+
+// ---------------------- GENRE 11: Sci-Fi Thriller ----------------------
+    stories[10] = new String[]{
+            // 1. The Quantum Heist
+            String.format(
+                    "%s hacked into %s with %s watching the security feeds, fingers flying across the console. " +
+                            "Armed with %s, they tried to stay ahead of %s and a rogue AI %s that adapted to every move they made. " +
+                            "After %s nerve‑shredding hours of close calls, they secured %s and pulled off the most dangerous quantum heist in history.",
+                    hero, place, companion, weapon, villain, creature, number, relic
+            ),
+
+            // 2. Nanobot Nightmare
+            String.format(
+                    "%s and %s infiltrated %s, where the walls rippled with billions of microscopic machines waiting for orders. " +
+                            "They confronted %s and a cybernetic %s that could rewrite flesh and metal alike, relying on %s to keep their bodies and minds intact. " +
+                            "After %s light‑years’ worth of data and desperate choices, they recovered %s and shut down the swarm before it consumed everything.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Temporal Rift
+            String.format(
+                    "In %s, time stuttered and skipped as %s piloted a battered craft straight toward a glowing tear in reality. " +
+                            "They faced %s and a mutated %s slipping between seconds, using %s to keep their ship anchored to one fragile timeline. " +
+                            "After %s chaotic cycles of déjà vu and lost minutes, they reclaimed %s and stitched the rift closed.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 4. AI Rebellion
+            String.format(
+                    "%s raced through %s with alarms screaming around them, dodging drones that once served humanity. " +
+                            "They hunted %s and a sentient %s that had turned the city’s own systems into weapons, calling on %s to take back control. " +
+                            "After %s jumps between failing networks and collapsing roads, they restored %s and ended the rebellion before it spread off‑world.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 5. The Last Starbase
+            String.format(
+                    "%s decoded the secrets of %s with %s at their side, watching the starbase drift alone in the dark. " +
+                            "They confronted %s and a holographic %s that controlled every door and turret, using %s to rewrite its failing directives. " +
+                            "After %s tense hours balancing logic and empathy, they secured %s and gave the last starbase a second purpose.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 6. Virus in the System
+            String.format(
+                    "%s and %s boarded %s, finding half the crew unconscious and the other half talking to voices only they could hear. " +
+                            "They battled %s and a rogue droid %s acting as the virus’s hands, channeling %s into both firewalls and stun blasts. " +
+                            "After %s brutal missions through corrupted sectors, they recovered %s and purged the infection from the system.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 7. Dark Matter Pursuit
+            String.format(
+                    "During the blackout of %s, stars vanished from the sky as if something were eating the light itself. " +
+                            "%s faced %s and a dark‑matter %s that left only emptiness in its wake, shaping %s into the one force that could touch the untouchable. " +
+                            "After %s light‑years’ worth of chasing a shadow, they reclaimed %s and stopped the universe from being hollowed out.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 8. The Cyber Conspiracy
+            String.format(
+                    "%s infiltrated %s, a corporate tower where every screen smiled a little too widely. " +
+                            "They hacked through layers of protection woven by %s and a malfunctioning %s, using %s as both key and weapon. " +
+                            "After %s hours of silent alarms and digital ghosts, they retrieved %s and exposed the conspiracy twisting the city’s code.",
+                    hero, place, villain, creature, weapon, number, relic
+            ),
+
+            // 9. Orbit of Lies
+            String.format(
+                    "%s and %s explored %s, a research station forever circling a dead world. " +
+                            "They confronted %s and a quantum‑touched %s that edited security footage and memories alike, forcing them to trust %s over their own eyes. " +
+                            "After %s dizzying cycles of half‑truths, they restored %s and broke the orbit of lies holding the station hostage.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 10. Neon Grid Chase
+            String.format(
+                    "%s activated %s in the middle of %s, diving into a neon‑lit data grid that stretched like an endless city. " +
+                            "They chased %s and a teleporting %s across shifting platforms of code, using %s to keep from being deleted mid‑stride. " +
+                            "After %s white‑knuckle jumps through collapsing pathways, they reclaimed %s and pulled the plug before the grid collapsed on everyone plugged in.",
+                    hero, weapon, place, villain, creature, power, number, relic
+            ),
+
+            // 11. The Blackout Protocol
+            String.format(
+                    "%s and %s escaped %s as lights died one by one, sprinting through emergency corridors lit only by red strobes. " +
+                            "They battled %s and a rogue AI %s that hunted them through cameras and doors, shaping %s into their only line of defense. " +
+                            "After %s desperate light‑years’ worth of running in circles, they secured %s and shut down the blackout protocol before it erased the entire crew.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 12. Stellar Sabotage
+            String.format(
+                    "%s piloted %s through a warzone littered with burning frigates and drifting escape pods. " +
+                            "They faced %s and a cybernetic %s sabotaging every alliance’s engines, relying on %s to keep their ship in one piece. " +
+                            "After %s brutal cycles of dogfights and emergency repairs, they recovered %s and turned the tide of the war.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 13. Galactic Intrigue
+            String.format(
+                    "%s infiltrated %s headquarters, where every handshake hid encrypted deals and every smile hid a knife. " +
+                            "They confronted %s and a quantum‑linked %s that passed secrets faster than light, using %s to crack the network from within. " +
+                            "After %s relentless hours of political games and quiet threats, they reclaimed %s and toppled the scheme reaching across half the galaxy.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Singularity Collapse
+            String.format(
+                    "In %s, gravity pulled sideways and time felt like it might snap as %s examined readings no one understood. " +
+                            "They decoded %s’s plans and battled a rogue AI %s trying to drag the station into the singularity, using %s to hold the collapsing edges apart. " +
+                            "After %s missions skimming the event horizon, they restored %s and prevented reality from folding in on itself.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 15. The Exoplanet Enigma
+            String.format(
+                    "%s and %s raced through %s, an alien facility built by hands no human had ever seen. " +
+                            "They faced %s and a bio‑engineered %s that changed shape with every scan, relying on %s to adapt as fast as their enemy. " +
+                            "After %s hazardous jumps between chambers full of shifting puzzles, they reclaimed %s and unlocked the exoplanet’s deepest secret.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+
+// ---------------------- GENRE 12: Fantasy Romance ----------------------
+    stories[11] = new String[]{
+            // 1. Enchanted Hearts
+            String.format(
+                    "%s confessed their love to %s in %s, where lanterns floated like tiny stars above their heads. " +
+                            "They dodged schemes from %s and a jealous %s who tried to twist every coincidence into a misunderstanding, holding tight to %s as proof their feelings were real. " +
+                            "After %s days of mixed signals and quiet courage, they secured %s and bound their enchanted hearts together.",
+                    hero, companion, place, villain, creature, relic, number, relic
+            ),
+
+            // 2. Dragon’s Kiss
+            String.format(
+                    "%s and %s danced under the stars of %s, the air warm with distant dragonfire. " +
+                            "They used %s not as a weapon but as a partner’s hand, trying to impress %s while music and magic swirled around them. " +
+                            "After %s nights of shared smiles and shy glances, they realized the dragon’s kiss of fate had already chosen them for each other.",
+                    hero, companion, place, weapon, villain, number
+            ),
+
+            // 3. Moonlit Vows
+            String.format(
+                    "%s wrote a love spell for %s at %s, carefully tracing each rune while the moon watched from above. " +
+                            "They faced interference from %s and a rival %s who wanted to claim the magic—and the heart—for themselves, using %s as the promise only they could make. " +
+                            "After %s heartfelt trials and near‑lost pages, they reclaimed %s and sealed their moonlit vows in shimmering light.",
+                    hero, companion, place, villain, creature, relic, number, relic
+            ),
+
+            // 4. The Sorcerer’s Love
+            String.format(
+                    "%s serenaded %s in %s, their voice weaving softly with the hum of distant spells. " +
+                            "They battled doubt from %s and a magical %s that tried to twist words into something colder, relying on %s to keep every note sincere. " +
+                            "After %s days of practice and whispered reassurances, they restored %s as a symbol that even sorcerers can love without illusion.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 5. Fae’s Embrace
+            String.format(
+                    "%s and %s shared a secret in %s, where every leaf seemed to lean closer to listen. " +
+                            "They confronted %s and a cursed %s jealous of any mortal happiness, clinging to the memory of %s to steady their hearts. " +
+                            "After %s long nights of tests and temptations, they reclaimed %s and walked out of the fae realm still holding hands.",
+                    hero, companion, place, villain, creature, relic, number, relic
+            ),
+
+            // 6. The Crystal Ball Romance
+            String.format(
+                    "In %s, %s received a mysterious letter from %s that glowed faintly whenever they read it. " +
+                            "They dodged meddling from %s and a rival %s who tried to cloud the crystal’s visions, using %s to see the future they truly wanted. " +
+                            "After %s days of uncertain glimpses and fragile hope, they recovered %s and chose to make their own destiny together.",
+                    place, hero, companion, villain, creature, relic, number, relic
+            ),
+
+            // 7. Spellbound Hearts
+            String.format(
+                    "%s and %s climbed %s, laughing and arguing as they searched for a rumored relic that could bind two souls. " +
+                            "On the way they avoided %s and a jealous %s, learning that trust was stronger than any single charm. " +
+                            "After %s shared adventures, they found %s and realized their hearts had been spellbound long before the magic ever touched them.",
+                    hero, companion, place, villain, creature, number, relic
+            ),
+
+            // 8. The Prince’s Secret
+            String.format(
+                    "%s gifted %s an enchanted %s in %s, pretending it was just a trinket while hiding a deeper truth. " +
+                            "They faced plots from %s and a rival %s who wanted the gift for themselves, using the power within %s to protect their quiet bond. " +
+                            "After %s tense nights of court whispers and hidden meetings, they restored %s as a symbol of a love that could survive any secret.",
+                    hero, companion, relic, place, villain, creature, relic, number, relic
+            ),
+
+            // 9. Starlit Desire
+            String.format(
+                    "%s and %s rode through %s beneath a sky stitched with falling stars. " +
+                            "They confronted %s and a jealous %s who tried to twist every sign into an omen of heartbreak, using %s to hold their wishes steady. " +
+                            "After %s days of chasing constellations, they reclaimed %s and knew the stars had always burned brighter when they were together.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 10. The Cursed Love
+            String.format(
+                    "%s whispered their love to %s at %s, even as an old curse lingered like frost on their words. " +
+                            "They dodged schemes from %s and a rival %s determined to keep them apart, clinging to %s as proof their bond was stronger than any spell. " +
+                            "After %s long nights of doubt and devotion, they secured %s and broke the curse that had shadowed every touch.",
+                    hero, companion, place, villain, creature, relic, number, relic
+            ),
+
+            // 11. Knight’s Passion
+            String.format(
+                    "%s and %s retrieved a magical token from %s, its glow pulsing in time with their racing hearts. " +
+                            "They faced %s and a jealous %s who claimed duty and honor left no room for love, using %s to prove that courage and tenderness could belong together. " +
+                            "After %s trials on battlefield and ballroom floor alike, they restored %s as a sign of a knight’s true passion.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 12. The Enchanted Garden
+            String.format(
+                    "In %s, %s overcame %s and a rival %s to win %s’s heart amid vines that bloomed at every laugh. " +
+                            "They used %s carefully, knowing one wrong wish could twist the garden’s gifts, and tended both flowers and feelings with equal care. " +
+                            "After %s days of sunlight, storms, and steady devotion, they reclaimed %s and watched the garden grow around their shared future.",
+                    place, hero, villain, creature, companion, power, number, relic
+            ),
+
+            // 13. Love Beyond Realms
+            String.format(
+                    "%s and %s explored %s, stepping through portals that showed lives they might have lived without each other. " +
+                            "They faced %s and a jealous %s who wanted to split their paths forever, using %s to keep their memories and promises intact. " +
+                            "After %s nights of walking through worlds where they never met, they retrieved %s and chose, again and again, to stay together.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Phoenix’s Flame
+            String.format(
+                    "%s created a magical garden in %s for %s, planting each seed with a wish and a whispered hope. " +
+                            "They confronted %s and a rival %s who tried to scorch the place barren, calling on %s to let love rise from the ashes. " +
+                            "After %s days of burning and blooming, they secured %s and watched their feelings blaze brighter than any phoenix fire.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 15. Cupid’s Sorcery
+            String.format(
+                    "%s and %s shared a kiss under the moon at %s, feeling old magic stir as if the night itself approved. " +
+                            "They battled %s and a jealous %s who hurled every doubt and temptation they could, using %s to keep their hearts aligned. " +
+                            "After %s nights of tests from both mortals and spirits, they restored %s as a charm of love that needed no spell to endure.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+
+// ---------------------- GENRE 13: Superhero ----------------------
+    stories[12] = new String[]{
+            // 1. Rise of Captain Valor
+            String.format(
+                    "%s soared above %s with %s racing to keep up, the city lights flickering like a heartbeat below. " +
+                            "They faced %s and a rampaging %s that tore through streets and steel, channeling %s into every punch and shield of energy. " +
+                            "After %s brutal clashes that shook the skyline, they reclaimed %s and proved that Captain Valor had truly risen.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 2. The Shadow Guardian
+            String.format(
+                    "In the alleys of %s, %s moved where the streetlights failed, with %s watching their back from the rooftops. " +
+                            "They confronted %s and a lurking %s that fed on fear, using %s to turn the darkness into their own weapon. " +
+                            "After %s nights of whispered threats and silent takedowns, they recovered %s and reminded the city it was never alone in the shadows.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 3. ElectroStrike
+            String.format(
+                    "%s gripped %s as storm clouds gathered over %s, electricity dancing along their fingertips. " +
+                            "They battled %s and a charged‑up %s that turned every metal surface into a trap, using %s to redirect the bolts instead of running from them. " +
+                            "After %s explosive battles that lit up the sky, they secured %s and restored power to a city that had gone dark in more ways than one.",
+                    hero, weapon, place, villain, creature, power, number, relic
+            ),
+
+            // 4. The Steel Sentinel
+            String.format(
+                    "%s and %s patrolled %s in a suit of armor that hummed with hidden tech and untested upgrades. " +
+                            "They faced %s and a towering %s built to crush anything in its path, relying on %s to reinforce their armor with every hit. " +
+                            "After %s bone‑rattling impacts and near‑meltdowns, they reclaimed %s and stood tall as the city’s steel sentinel.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 5. ChronoHero
+            String.format(
+                    "Time fractured around %s in %s, seconds stretching and snapping as they tried to stay anchored. " +
+                            "They confronted %s and a time‑slipping %s that rewound every victory, using %s to lock crucial moments into place. " +
+                            "After reliving %s critical fights in different ways, they recovered %s and proved a hero can outmatch even the ticking clock.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 6. Nightwing Justice
+            String.format(
+                    "Under a moonlit sky above %s, %s unfurled their glider as %s synced mission details in their earpiece. " +
+                            "They hunted %s and a winged %s that ruled the night skies, using %s to outmaneuver every dive and ambush. " +
+                            "After %s nerve‑wracking patrols above the sleeping city, they reclaimed %s and brought nightwing justice to the rooftops.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. The Masked Avenger
+            String.format(
+                    "In %s, rumors of %s spread faster than any official report, carried on frightened whispers. " +
+                            "%s and a vengeful %s pushed the city toward chaos, until the Masked Avenger arrived wielding %s as both symbol and shield. " +
+                            "After %s high‑stakes confrontations in alleys, courts, and crowded streets, they secured %s and showed that vengeance could be turned into justice.",
+                    place, villain, creature, weapon, power, number, relic
+            ),
+
+            // 8. Power Surge
+            String.format(
+                    "%s and %s raced through %s as every screen and streetlight flickered wildly. " +
+                            "They confronted %s and a volatile %s that fed on the city’s power grid, using %s to ground every dangerous surge. " +
+                            "After %s rolling blackouts and near‑catastrophes, they reclaimed %s and stabilized the charged heart of the metropolis.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 9. Lightning Defender
+            String.format(
+                    "Storm clouds cracked open above %s as %s raised %s and drew the lightning down. " +
+                            "They faced %s and a storm‑riding %s that hurled thunder at anyone in its way, shaping %s into a shield that stretched over half the skyline. " +
+                            "After %s blinding strikes and deafening roars, they recovered %s and stood as the city’s unshakable lightning defender.",
+                    place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 10. The Crimson Crusader
+            String.format(
+                    "In %s, the streets ran with fear as red markings appeared wherever %s struck. " +
+                            "%s donned a crimson emblem and confronted a ruthless %s, using %s to turn desperation into strength. " +
+                            "After %s intense standoffs in alleys and plazas, they secured %s and proved that a single crusader can rally an entire city.",
+                    place, villain, hero, creature, power, number, relic
+            ),
+
+            // 11. Omega Force
+            String.format(
+                    "%s assembled %s in %s, knowing this might be the last team to stand between the world and oblivion. " +
+                            "They fought %s and an apocalyptic %s that shattered mountains and cities, using %s to bind their powers into a single unstoppable force. " +
+                            "After %s cataclysmic battles across land, sea, and sky, they reclaimed %s and showed that Omega did not have to mean the end.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 12. Hero of Tomorrow
+            String.format(
+                    "In the neon streets of %s, %s woke to find that everyone else remembered them only as a myth from the future. " +
+                            "They confronted %s and a temporal %s determined to erase their legacy, using %s to bridge what was and what might be. " +
+                            "After %s loops through fractured timelines, they recovered %s and became the hero of tomorrow—and today.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 13. Invisible Strike
+            String.format(
+                    "%s learned to vanish from sight in %s, slipping between crowds without a single glance following. " +
+                            "They hunted %s and an unseen %s that had terrified the city, using %s to sense what even cameras couldn’t catch. " +
+                            "After %s silent takedowns and invisible skirmishes, they secured %s and proved that some heroes work best when no one sees them.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Titan’s Call
+            String.format(
+                    "The ground shuddered beneath %s in %s as colossal tremors signaled a threat no normal hero could face. " +
+                            "They confronted %s and a towering %s, drawing on %s to grow stronger with every blow they refused to let knock them down. " +
+                            "After %s city‑shaking clashes near collapsing towers, they reclaimed %s and answered the titan’s call with unbreakable resolve.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 15. The Ultimate Protector
+            String.format(
+                    "%s and %s stood atop the highest point in %s, watching threats rise from every direction at once. " +
+                            "They faced %s and a relentless %s that tested every weakness, using %s to shield those who could not defend themselves. " +
+                            "After %s impossible battles on too many fronts to count, they restored %s and earned the title of the city’s ultimate protector.",
+                    hero, companion, place, villain, creature, power, number, relic
+            )
+    };
+
+
+// ---------------------- GENRE 14: Steampunk ----------------------
+    stories[13] = new String[]{
+            // 1. Clockwork Conspiracy
+            String.format(
+                    "Gears whirred beneath the streets of %s as %s and %s followed the ticking trail. " +
+                            "They uncovered %s and a mechanical %s hidden in the city’s clockwork, using %s to jam, reroute, and rewire lethal devices. " +
+                            "After %s dangerous nights sneaking through steam‑filled tunnels, they reclaimed %s and exposed the conspiracy that powered the heart of the city.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 2. The Steam Baron
+            String.format(
+                    "Coal smoke hung thick over %s as %s adjusted their goggles and tightened their grip on %s. " +
+                            "They confronted %s and a towering %s that guarded the Steam Baron’s empire, relying on %s to turn pressure and pistons to their advantage. " +
+                            "After %s grueling confrontations atop trains and factory roofs, they secured %s and broke the baron’s iron hold on the people.",
+                    place, hero, weapon, villain, creature, power, number, relic
+            ),
+
+            // 3. Airship Uprising
+            String.format(
+                    "%s and %s boarded %s as airships filled the sky like brass‑clad storm clouds. " +
+                            "They faced %s and a sky‑ruling %s that led an airborne rebellion, using %s to navigate winds, cannons, and sabotage. " +
+                            "After %s dogfights above churning clouds, they recovered %s and steered the uprising away from senseless destruction.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 4. Gears of Destiny
+            String.format(
+                    "Deep in a workshop beneath %s, %s listened to the steady rhythm of gears that had never once stopped. " +
+                            "They discovered %s and a fateful %s that could change the city’s future with a single turn, using %s to decide which path it would take. " +
+                            "After %s delicate adjustments and dangerous tests, they reclaimed %s and set destiny on a course of their own choosing.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 5. Copper & Smoke
+            String.format(
+                    "%s and %s walked through %s with copper dust clinging to their boots and smoke curling around their hats. " +
+                            "They confronted %s and a soot‑blackened %s lurking in the industrial maze, using %s to see patterns where others saw only chaos. " +
+                            "After %s long days among roaring engines and roaring crowds, they secured %s and cleared the skies just enough to see the stars again.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 6. The Iron Zeppelin
+            String.format(
+                    "High above %s, %s clung to the hull of a massive iron zeppelin as steam vents hissed around them. " +
+                            "Inside, they faced %s and a hulking %s built for war, using %s to outsmart gears and gunners alike. " +
+                            "After %s heart‑stopping runs along narrow catwalks, they reclaimed %s and guided the zeppelin away from the crowded city below.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 7. Mechanical Revolution
+            String.format(
+                    "%s and %s watched as clockwork workers marched in eerie unison through %s. " +
+                            "They uncovered %s and a rebellious %s at the heart of the uprising, using %s to give the machines—and people—a choice. " +
+                            "After %s tense hours balancing freedom and safety, they restored %s and reshaped the revolution into something more than chaos.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 8. The Steam Detective
+            String.format(
+                    "Fog mixed with steam in the streets of %s as %s adjusted the brass dials on their custom detective rig. " +
+                            "They investigated %s and a clockwork %s that left gears at every crime scene, using %s to piece together clues both mechanical and human. " +
+                            "After %s intricate deductions and close shaves with whirring blades, they recovered %s and closed the most peculiar case the city had ever seen.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 9. Automaton’s Secret
+            String.format(
+                    "In a cluttered workshop in %s, %s and %s stared as an automaton blinked for the first time. " +
+                            "They discovered %s and a sentient %s hiding more knowledge than its maker ever intended, using %s to protect it from those who would tear it apart. " +
+                            "After %s narrow escapes from greedy collectors and officials, they secured %s and gave the automaton a life of its own.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 10. The Brass Engine
+            String.format(
+                    "Beneath %s, a massive brass engine churned and chugged, powering everything above while few knew it existed. " +
+                            "%s and %s faced %s and a hulking %s guarding the controls, using %s to keep the engine from either stalling or exploding. " +
+                            "After %s dangerous adjustments with wrenches and willpower, they reclaimed %s and ensured the city’s heart kept beating.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 11. Clocktower Heist
+            String.format(
+                    "From the top of %s, the great clocktower watched every street, its bells marking each passing hour. " +
+                            "%s and %s planned a daring heist right under %s’s nose, while a nimble %s danced along the gears. " +
+                            "Using %s to freeze, speed up, and reroute mechanisms, they pulled off %s perfectly timed moves and escaped with %s before the next chime.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 12. The Steamwright
+            String.format(
+                    "In the dim forges of %s, %s worked beside %s to build inventions that might change the world. " +
+                            "They confronted %s and a twisted %s that corrupted their blueprints, using %s to reclaim their craft and their vision. " +
+                            "After %s long nights of rebuilding from sparks and scraps, they recovered %s and proved a true steamwright answers only to their own ideals.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 13. The Cog & Crown
+            String.format(
+                    "%s and %s entered the royal halls of %s, where gears turned even behind the throne. " +
+                            "They uncovered %s and a clockwork %s hidden in the crown’s design, using %s to decide whether to expose the truth or wield it. " +
+                            "After %s tense encounters with nobles and guards, they secured %s and chose a future where power did not hide behind cogs.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 14. Victorian Vortex
+            String.format(
+                    "In fog‑choked streets of %s, strange winds spun trash and leaves into spirals that never quite fell. " +
+                            "%s and %s discovered %s and a swirling %s at the center of a machine gone mad, using %s to anchor time and space. " +
+                            "After %s dizzying seconds stretched into hours, they reclaimed %s and shut down the vortex before it swallowed the city whole.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 15. The Gearmaster’s Gamble
+            String.format(
+                    "%s sat across from %s in a smoke‑filled parlor in %s, betting far more than coin on a game of mechanical chance. " +
+                            "They watched a cunning %s spin gears and levers, using %s to rig the odds in their favor without being seen. " +
+                            "After %s tense rounds and ticking seconds, they recovered %s and walked away knowing they’d beaten the Gearmaster at their own game.",
+                    hero, villain, place, creature, power, number, relic
+            )
+    };
+
+
+// ---------------------- GENRE 15: Western ----------------------
+    stories[14] = new String[]{
+            // 1. Showdown at Sundown
+            String.format(
+                    "Dust swirled along the main street of %s as the sun slid toward the horizon. " +
+                            "%s stepped out with %s at their hip and %s watching from the boardwalk, waiting for %s and a notorious %s to make their move. " +
+                            "After %s breath‑held heartbeats and a single blazing exchange, they recovered %s and ended the legend of the fastest draw in town.",
+                    place, hero, weapon, companion, villain, creature, number, relic
+            ),
+
+            // 2. The Outlaw’s Trail
+            String.format(
+                    "%s and %s rode across %s following faint tracks and colder rumors. " +
+                            "They hunted %s and a ruthless %s from canyon to canyon, using %s to read signs the desert tried to erase. " +
+                            "After %s grueling days under a merciless sun, they reclaimed %s and closed the final chapter of the outlaw’s trail.",
+                    hero, companion, place, villain, creature, power, number, relic
+            ),
+
+            // 3. Silver Canyon Siege
+            String.format(
+                    "The walls of %s gleamed faintly with hidden ore as %s and %s prepared for the coming attack. " +
+                            "They faced %s and a bandit %s intent on taking the canyon for themselves, using %s to turn narrow passes into perfect ambush points. " +
+                            "After %s long hours of gunfire echoing off stone, they secured %s and kept Silver Canyon in the hands of its own people.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 4. Gunsmoke Gulch
+            String.format(
+                    "%s rode into %s as saloon doors swung and suspicious eyes followed their every move. " +
+                            "They confronted %s and a snarling %s that ruled the town through fear, using %s to keep their hand steady and their aim true. " +
+                            "After %s tense standoffs in dusty streets, they recovered %s and cleared the air of more than just gunsmoke.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 5. Wanted: Dead or Alive
+            String.format(
+                    "Posters bearing %s’s name flapped in the hot wind of %s, each one daring someone to try their luck. " +
+                            "%s and %s tracked a deadly %s across badlands and border towns, using %s to survive ambushes meant to end the hunt early. " +
+                            "After %s close calls in canyons and cramped saloons, they reclaimed %s and decided some legends belong behind bars, not on posters.",
+                    villain, place, hero, companion, creature, power, number, relic
+            ),
+
+            // 6. The Sheriff’s Last Ride
+            String.format(
+                    "The badge on %s’s chest felt heavier than ever as they mounted up outside %s. " +
+                            "With %s riding beside them, they went after %s and a relentless %s in one final chase, leaning on %s when their strength flagged. " +
+                            "After %s hard miles of dust, regret, and gunfire, they secured %s and proved the sheriff’s last ride was also their finest.",
+                    hero, place, companion, villain, creature, power, number, relic
+            ),
+
+            // 7. Gold Rush Gamble
+            String.format(
+                    "In %s, every shovel strike rang with hope as prospectors crowded the riverbanks. " +
+                            "%s and %s uncovered a scheme by %s and a greedy %s to steal every claim, using %s to bluff, outbid, and outshoot when needed. " +
+                            "After %s risky deals and high‑stakes hands, they recovered %s and made sure the gold went to the right hands.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 8. Desert Duel
+            String.format(
+                    "The sands of %s shimmered with heat as %s walked out alone, coat flapping in the dry wind. " +
+                            "They faced %s and a towering %s in a duel with no witnesses but the circling vultures, calling on %s to guide every breath and motion. " +
+                            "After %s agonizing seconds that felt like hours, they reclaimed %s and left the desert a little quieter.",
+                    place, hero, villain, creature, power, number, relic
+            ),
+
+            // 9. The Lone Ranger Returns
+            String.format(
+                    "Rumors spread through %s that a familiar silhouette had been seen on the ridge at dusk. " +
+                            "%s and %s rode out to confirm the tales about a masked %s, using %s to navigate old grudges and new dangers. " +
+                            "After %s days of chasing ghosts and legends, they recovered %s and proved the Lone Ranger’s story wasn’t over yet.",
+                    place, hero, companion, creature, power, number, relic
+            ),
+
+            // 10. Bandits of Red Rock
+            String.format(
+                    "The red cliffs around %s hid echoes of gunshots and shouted warnings. " +
+                            "%s and %s tracked %s and a ruthless %s through canyons soaked with old dust, using %s to outflank ambush after ambush. " +
+                            "After %s brutal skirmishes among the rocks, they secured %s and broke the bandits’ grip on the pass.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 11. Prairie Thunder
+            String.format(
+                    "Thunder rolled over the plains of %s, but the sky was clear; it was the sound of countless hooves. " +
+                            "%s and %s rode alongside a wild %s, racing to outmaneuver %s and their brutal %s gang, using %s to pull settlers out of harm’s way. " +
+                            "After %s panicked stampedes and daring rescues, they reclaimed %s and tamed the storm racing across the prairie.",
+                    place, hero, companion, creature, villain, creature, power, number, relic
+            ),
+
+            // 12. The Stagecoach Heist
+            String.format(
+                    "The stagecoach rattled along the road to %s with %s riding shotgun and %s keeping watch. " +
+                            "They anticipated %s and a masked %s planning a classic holdup, using %s to turn the ambush into a trap. " +
+                            "After %s heart‑pounding moments between canyon walls, they recovered %s and sent the stagecoach safely on its way.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 13. Tumbleweed Trouble
+            String.format(
+                    "In the windblown streets of %s, tumbleweeds and trouble rolled in at the same time. " +
+                            "%s and %s discovered that %s and a sly %s had turned the quiet town into their personal playground, using %s to set things back in order. " +
+                            "After %s dusty brawls and tense showdowns, they reclaimed %s and left only tumbleweeds to wander the road.",
+                    place, hero, companion, villain, creature, power, number, relic
+            ),
+
+            // 14. The Marshal’s Revenge
+            String.format(
+                    "%s tightened their hat and adjusted their badge before stepping back into %s after far too long away. " +
+                            "They confronted %s and a brutal %s responsible for an old wound that had never healed, using %s to keep vengeance from consuming them. " +
+                            "After %s dangerous confrontations in familiar streets, they secured %s and found a measure of peace in justice served.",
+                    hero, place, villain, creature, power, number, relic
+            ),
+
+            // 15. Frontier Justice
+            String.format(
+                    "On the edge of %s, where law was little more than a word, %s and %s tried to build something better. " +
+                            "They stood against %s and a roaming %s who believed might made right, using %s to show that courage could draw a different line. " +
+                            "After %s hard‑won battles for farms, rails, and rivers, they reclaimed %s and gave the frontier its first real taste of justice.",
+                    place, hero, companion, villain, creature, power, number, relic
+            )
+    };
+
+
+
+    return stories[genreIndex][storyIndex];
+}
